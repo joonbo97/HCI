@@ -1,5 +1,6 @@
 package com.example.hci
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
@@ -20,6 +21,12 @@ class SelectCategory : AppCompatActivity() {
 
         image1.setOnClickListener {
             finish()
+        }
+
+        val ImageMakeGroup: ImageView = findViewById(R.id.makegroup_img)
+        ImageMakeGroup.setOnClickListener {
+            val intent = Intent(this, MakegroupActivity::class.java)
+            startActivity(intent)
         }
     }
 }
