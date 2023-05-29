@@ -192,8 +192,8 @@
 
     <ImageView
         android:id="@+id/inboxok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="91dp"
+        android:layout_height="25dp"
         android:layout_marginStart="263dp"
         android:layout_marginTop="523dp"
         android:layout_marginEnd="56dp"
@@ -202,12 +202,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/emailokbtn" />
+        app:srcCompat="@drawable/regester_okbtn" />
 
     <ImageView
         android:id="@+id/inboxsend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="91dp"
+        android:layout_height="25dp"
         android:layout_marginStart="261dp"
         android:layout_marginTop="481dp"
         android:layout_marginEnd="58dp"
@@ -216,7 +216,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/emailcertificationsendbtn" />
+        app:srcCompat="@drawable/regester_sendbtn" />
 
     <EditText
         android:id="@+id/editID"

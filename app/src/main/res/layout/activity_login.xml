@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/IntroImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="279dp"
+        android:layout_height="96dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="85dp"
         android:layout_marginEnd="48dp"
@@ -25,7 +25,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/intro" />
+        app:srcCompat="@drawable/intro_3x" />
 
     <ImageView
         android:id="@+id/ID_Background"
@@ -105,8 +105,8 @@
 
     <ImageButton
         android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="299dp"
+        android:layout_height="49dp"
         android:layout_marginBottom="19dp"
         android:background="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/imageView4"
@@ -128,25 +128,25 @@
 
     <ImageView
         android:id="@+id/SearchIDPW"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="15dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="21dp"
         app:layout_constraintEnd_toStartOf="@+id/Regester"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/searchidpw" />
+        app:srcCompat="@drawable/searchidpw_3x" />
 
     <ImageView
         android:id="@+id/Regester"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="53dp"
+        android:layout_height="15dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/SearchIDPW"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/regerster" />
+        app:srcCompat="@drawable/regester_3x" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -55,16 +55,16 @@
         app:srcCompat="@drawable/back" />
 
     <ImageView
-        android:id="@+id/bookmark_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/alarm_image"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
         android:layout_marginStart="162dp"
         android:layout_marginEnd="219dp"
         app:layout_constraintBottom_toTopOf="@+id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/alarm" />
+        app:srcCompat="@drawable/top_alarm"/>
 
     <TextView
         android:id="@+id/bookmark_text"

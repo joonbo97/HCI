@@ -26,8 +26,8 @@
 
     <ImageView
         android:id="@+id/bookmark_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_marginStart="145dp"
         android:layout_marginTop="53dp"
         android:layout_marginEnd="244dp"
@@ -36,5 +36,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whitestar" />
+        app:srcCompat="@drawable/top_bookmark" />
 </android.support.constraint.ConstraintLayout>
