@@ -11,17 +11,16 @@
         android:id="@+id/titie_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="183dp"
+        android:layout_marginStart="147dp"
         android:layout_marginTop="49dp"
-        android:layout_marginEnd="184dp"
-        android:layout_marginBottom="650dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="37dp"
         android:clickable="false"
         android:text="나의 프로필"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toTopOf="@+id/myphoto_image"
+        app:layout_constraintEnd_toStartOf="@+id/chat_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,30 +54,24 @@
 
     <ImageView
         android:id="@+id/friend_image"
-        android:layout_width="33dp"
+        android:layout_width="0dp"
         android:layout_height="33dp"
-        android:layout_marginStart="354dp"
         android:layout_marginTop="49dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="649dp"
         android:src="@drawable/myprofile_friend"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chat_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/chat_image"
-        android:layout_width="33dp"
+        android:layout_width="0dp"
         android:layout_height="33dp"
-        android:layout_marginStart="311dp"
         android:layout_marginTop="49dp"
-        android:layout_marginEnd="67dp"
-        android:layout_marginBottom="649dp"
+        android:layout_marginEnd="10dp"
         android:src="@drawable/myprofile_chat"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/friend_image"
+        app:layout_constraintStart_toEndOf="@+id/titie_text"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -97,7 +90,7 @@
     <ImageView
         android:id="@+id/imageView21"
         android:layout_width="198dp"
-        android:layout_height="20dp"
+        android:layout_height="0dp"
         android:src="@drawable/myprofile_whitebar"
         app:layout_constraintBottom_toTopOf="@+id/myscort_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,12 +145,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="431dp"
-        android:layout_marginBottom="279dp"
         android:clickable="false"
         android:text="나의 별점"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +164,6 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myemail_title" />
 
@@ -181,16 +171,16 @@
         android:id="@+id/myscore_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="247dp"
+        android:layout_marginTop="471dp"
         android:clickable="false"
         android:text="5.0"
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView20"
@@ -207,9 +197,10 @@
         android:id="@+id/myphoto_image"
         android:layout_width="107dp"
         android:layout_height="107dp"
-        android:layout_marginTop="117dp"
+        android:layout_marginTop="118dp"
         android:src="@drawable/myprofile_myphoto"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
