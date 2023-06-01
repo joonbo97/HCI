@@ -19,6 +19,8 @@ class RegesterActivity : AppCompatActivity() {
 
         val nextBtn: ImageButton = findViewById(R.id.nextbtn)
         nextBtn.setOnClickListener {
+
+
             val intent = Intent(this, SetlocationActivity::class.java)
             startActivity(intent)
         }
