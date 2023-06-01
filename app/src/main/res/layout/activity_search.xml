@@ -7,36 +7,41 @@
     android:background="@drawable/trst"
     tools:context=".SearchActivity">
 
+    <ImageView
+        android:id="@+id/back_image3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="138dp"
+        app:layout_constraintEnd_toStartOf="@+id/search_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
     <TextView
         android:id="@+id/bookmark_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="195dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="172dp"
-        android:layout_marginBottom="651dp"
         android:clickable="false"
         android:text="검색"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/search_image"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/search_image"
-        android:layout_width="25dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
-        android:layout_marginStart="168dp"
         android:layout_marginTop="53dp"
-        android:layout_marginEnd="218dp"
-        android:layout_marginBottom="653dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/bookmark_text"
+        app:layout_constraintStart_toEndOf="@+id/back_image3"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/search" />
+        app:srcCompat="@drawable/top_search" />
 
 </android.support.constraint.ConstraintLayout>

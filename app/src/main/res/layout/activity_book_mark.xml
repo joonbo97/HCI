@@ -7,34 +7,40 @@
     android:background="@drawable/trst"
     tools:context=".BookMarkActivity">
 
+    <ImageView
+        android:id="@+id/back_image2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="115dp"
+        app:layout_constraintEnd_toStartOf="@+id/bookmark_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
     <TextView
         android:id="@+id/bookmark_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="147dp"
-        android:layout_marginBottom="651dp"
         android:clickable="false"
         android:text="즐겨찾기"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bookmark_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/bookmark_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
         android:layout_marginTop="53dp"
-        android:layout_marginEnd="244dp"
-        android:layout_marginBottom="657dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="9dp"
+        app:layout_constraintEnd_toStartOf="@+id/bookmark_text"
+        app:layout_constraintStart_toEndOf="@+id/back_image2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whitestar" />
+        app:srcCompat="@drawable/top_bookmark" />
 </android.support.constraint.ConstraintLayout>

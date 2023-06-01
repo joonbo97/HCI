@@ -5,4 +5,648 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/trst"
-    tools:context=".MakegroupActivity"/>
+    tools:context=".MakegroupActivity">
+
+    <ImageView
+        android:id="@+id/health_image"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="284dp"
+        android:layout_marginEnd="356dp"
+        android:layout_marginBottom="426dp"
+        android:src="@drawable/category_health"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="183dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="184dp"
+        android:layout_marginBottom="650dp"
+        android:clickable="false"
+        android:text="모임 만들기"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/back_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="381dp"
+        android:layout_marginBottom="658dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="357dp"
+        android:layout_marginBottom="560dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_cal" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginEnd="357dp"
+        android:layout_marginBottom="599dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_gps" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/groupname_text4"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/groupname_text4"
+        app:srcCompat="@drawable/makegroup_person" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="189dp"
+        android:layout_marginEnd="357dp"
+        android:layout_marginBottom="521dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_time" />
+
+    <TextView
+        android:id="@+id/local_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="318dp"
+        android:layout_marginBottom="597dp"
+        android:text="지역"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="146dp"
+        android:layout_marginEnd="318dp"
+        android:layout_marginBottom="558dp"
+        android:text="날짜"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/starttime_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="185dp"
+        android:layout_marginEnd="275dp"
+        android:layout_marginBottom="519dp"
+        android:text="시작 시간"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/endtime_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="275dp"
+        android:layout_marginBottom="480dp"
+        android:text="종료 시간"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/groupname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginEnd="275dp"
+        android:layout_marginBottom="364dp"
+        android:text="모임 이름"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/groupname_text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="608dp"
+        android:layout_marginEnd="318dp"
+        android:layout_marginBottom="96dp"
+        android:text="정원"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/groupdiscription_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="378dp"
+        android:layout_marginEnd="275dp"
+        android:layout_marginBottom="326dp"
+        android:text="모임 설명"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/grouptype_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="281dp"
+        android:layout_marginEnd="254dp"
+        android:layout_marginBottom="423dp"
+        android:text="운동/스포츠"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/local_box"
+        android:layout_width="280dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="593dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_largebox" />
+
+    <ImageView
+        android:id="@+id/groupname_box"
+        android:layout_width="242dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="337dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="363dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_groupname" />
+
+    <EditText
+        android:id="@+id/local_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="599dp"
+        android:background="@color/white"
+        android:ems="14"
+        android:hint="구체적으로 열릴 장소를 입력해주세요."
+        android:inputType="text"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/groupname_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:background="@color/white"
+        android:ems="12"
+        android:hint="모임 이름을 입력하세요."
+        android:inputType="text"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/groupname_box"
+        app:layout_constraintStart_toStartOf="@+id/groupname_box"
+        app:layout_constraintTop_toBottomOf="@+id/groupname_box" />
+
+    <ImageView
+        android:id="@+id/date_year_box"
+        android:layout_width="99dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="202dp"
+        android:layout_marginBottom="557dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_year" />
+
+    <EditText
+        android:id="@+id/date_year_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="38dp"
+        android:background="@color/white"
+        android:ems="2"
+        android:hint="2023"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/date_year_box"
+        app:layout_constraintEnd_toEndOf="@+id/date_year_box"
+        app:layout_constraintStart_toStartOf="@+id/date_year_box"
+        app:layout_constraintTop_toBottomOf="@+id/date_year_box" />
+
+    <TextView
+        android:id="@+id/date_year_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:text="년"
+        app:layout_constraintBottom_toTopOf="@+id/date_year_box"
+        app:layout_constraintEnd_toEndOf="@+id/date_year_box"
+        app:layout_constraintStart_toEndOf="@+id/date_year_edit"
+        app:layout_constraintTop_toBottomOf="@+id/date_year_box" />
+
+    <ImageView
+        android:id="@+id/date_month_box"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="229dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="113dp"
+        android:layout_marginBottom="557dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_month" />
+
+    <EditText
+        android:id="@+id/date_month_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:background="@color/white"
+        android:ems="1"
+        android:hint="12"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/date_month_box"
+        app:layout_constraintStart_toStartOf="@+id/date_month_box"
+        app:layout_constraintTop_toBottomOf="@+id/date_month_box" />
+
+    <TextView
+        android:id="@+id/date_month_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:text="월"
+        app:layout_constraintBottom_toTopOf="@+id/date_month_box"
+        app:layout_constraintEnd_toEndOf="@+id/date_month_box"
+        app:layout_constraintTop_toBottomOf="@+id/date_month_box" />
+
+    <ImageView
+        android:id="@+id/date_day_box"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="321dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="557dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_month" />
+
+    <EditText
+        android:id="@+id/date_day_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:background="@color/white"
+        android:ems="1"
+        android:hint="31"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/date_day_box"
+        app:layout_constraintStart_toStartOf="@+id/date_day_box"
+        app:layout_constraintTop_toBottomOf="@+id/date_day_box" />
+
+    <TextView
+        android:id="@+id/date_day_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="19dp"
+        android:text="일"
+        app:layout_constraintBottom_toTopOf="@+id/date_day_box"
+        app:layout_constraintEnd_toEndOf="@+id/date_day_box"
+        app:layout_constraintTop_toBottomOf="@+id/date_day_box" />
+
+    <ImageView
+        android:id="@+id/starttime_min_box"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="322dp"
+        android:layout_marginTop="183dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="518dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_month" />
+
+    <EditText
+        android:id="@+id/starttime_min_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:background="@color/white"
+        android:ems="1"
+        android:hint="30"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/starttime_min_box"
+        app:layout_constraintStart_toStartOf="@+id/starttime_min_box"
+        app:layout_constraintTop_toBottomOf="@+id/starttime_min_box" />
+
+    <TextView
+        android:id="@+id/starttime_min_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:text="분"
+        app:layout_constraintBottom_toTopOf="@+id/starttime_min_box"
+        app:layout_constraintEnd_toEndOf="@+id/starttime_min_box"
+        app:layout_constraintTop_toBottomOf="@+id/starttime_min_box" />
+
+    <ImageView
+        android:id="@+id/starttime_hour_box"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="229dp"
+        android:layout_marginTop="183dp"
+        android:layout_marginEnd="113dp"
+        android:layout_marginBottom="518dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_month" />
+
+    <EditText
+        android:id="@+id/starttime_hour_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        android:ems="1"
+        android:hint="17"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/starttime_hour_box"
+        app:layout_constraintStart_toStartOf="@+id/starttime_hour_box"
+        app:layout_constraintTop_toBottomOf="@+id/starttime_hour_box" />
+
+    <TextView
+        android:id="@+id/starttime_hour_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:text="시"
+        app:layout_constraintBottom_toTopOf="@+id/starttime_hour_box"
+        app:layout_constraintEnd_toEndOf="@+id/starttime_hour_box"
+        app:layout_constraintTop_toBottomOf="@+id/starttime_hour_box" />
+
+
+    <ImageView
+        android:id="@+id/endtime_min_box"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="322dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="479dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_month" />
+
+    <EditText
+        android:id="@+id/endtime_min_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:background="@color/white"
+        android:ems="1"
+        android:hint="30"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/endtime_min_box"
+        app:layout_constraintStart_toStartOf="@+id/endtime_min_box"
+        app:layout_constraintTop_toBottomOf="@+id/endtime_min_box" />
+
+    <TextView
+        android:id="@+id/endtime_min_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:text="분"
+        app:layout_constraintBottom_toTopOf="@+id/endtime_min_box"
+        app:layout_constraintEnd_toEndOf="@+id/endtime_min_box"
+        app:layout_constraintTop_toBottomOf="@+id/endtime_min_box" />
+
+    <ImageView
+        android:id="@+id/endtime_hour_box"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="229dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginEnd="113dp"
+        android:layout_marginBottom="479dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_month" />
+
+    <EditText
+        android:id="@+id/endtime_hour_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        android:ems="1"
+        android:hint="23"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/endtime_hour_box"
+        app:layout_constraintStart_toStartOf="@+id/endtime_hour_box"
+        app:layout_constraintTop_toBottomOf="@+id/endtime_hour_box" />
+
+
+    <ImageView
+        android:id="@+id/maxpeople_box"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="326dp"
+        android:layout_marginTop="606dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="95dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_month" />
+
+    <EditText
+        android:id="@+id/maxpeople_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:background="@color/white"
+        android:ems="1"
+        android:hint="10"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/maxpeople_box"
+        app:layout_constraintStart_toStartOf="@+id/maxpeople_box"
+        app:layout_constraintTop_toBottomOf="@+id/maxpeople_box" />
+
+    <TextView
+        android:id="@+id/maxpeople_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="612dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="100dp"
+        android:text="명"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/maxpeople_box"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/endtime_hour_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:text="시"
+        app:layout_constraintBottom_toTopOf="@+id/endtime_hour_box"
+        app:layout_constraintEnd_toEndOf="@+id/endtime_hour_box"
+        app:layout_constraintTop_toBottomOf="@+id/endtime_hour_box" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="360dp"
+        android:layout_height="189dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="410dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="132dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/makegroup_text" />
+
+
+    <EditText
+        android:id="@+id/groupdiscription_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="38dp"
+        android:background="@color/white"
+        android:ems="21"
+        android:hint="모임 설명을 입력하세요."
+        android:inputType="none"
+        android:maxLines="10"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="343dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/makegroup_createbtn" />
+
+
+</android.support.constraint.ConstraintLayout>

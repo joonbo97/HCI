@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/IntroImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="279dp"
+        android:layout_height="96dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="85dp"
         android:layout_marginEnd="48dp"
@@ -25,7 +25,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/intro" />
+        app:srcCompat="@drawable/intro_3x" />
 
     <ImageView
         android:id="@+id/ID_Background"
@@ -65,30 +65,24 @@
         android:id="@+id/username"
         android:layout_width="276dp"
         android:layout_height="45dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="446dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="7dp"
         android:autofillHints="아이디"
         android:background="@null"
         android:hint=" 아이디"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toTopOf="@+id/ID_Background"
+        app:layout_constraintEnd_toEndOf="@+id/ID_Background"
+        app:layout_constraintStart_toStartOf="@+id/ID_Background"
+        app:layout_constraintTop_toBottomOf="@+id/ID_Background" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="276dp"
         android:layout_height="45dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="299dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="371dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="13dp"
         android:autofillHints="비밀번호"
         android:background="@null"
         android:hint=" 비밀번호"
@@ -96,17 +90,15 @@
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toTopOf="@+id/PW_Background"
+        app:layout_constraintEnd_toEndOf="@+id/PW_Background"
+        app:layout_constraintStart_toStartOf="@+id/PW_Background"
+        app:layout_constraintTop_toBottomOf="@+id/PW_Background" />
 
     <ImageButton
         android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="299dp"
+        android:layout_height="49dp"
         android:layout_marginBottom="19dp"
         android:background="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/imageView4"
@@ -128,25 +120,25 @@
 
     <ImageView
         android:id="@+id/SearchIDPW"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="15dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="21dp"
         app:layout_constraintEnd_toStartOf="@+id/Regester"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/searchidpw" />
+        app:srcCompat="@drawable/searchidpw_3x" />
 
     <ImageView
         android:id="@+id/Regester"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="53dp"
+        android:layout_height="15dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/SearchIDPW"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/regerster" />
+        app:srcCompat="@drawable/regester_3x" />
 
 
 </android.support.constraint.ConstraintLayout>
