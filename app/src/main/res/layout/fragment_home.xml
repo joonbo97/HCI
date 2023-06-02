@@ -11,348 +11,254 @@
         android:id="@+id/drive_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="294dp"
-        android:layout_marginTop="535dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="129dp"
         android:src="@drawable/category_drive"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/photo_image" />
 
     <ImageView
         android:id="@+id/volunteer_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="294dp"
-        android:layout_marginTop="405dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="259dp"
         android:src="@drawable/category_volunteer"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/game_image" />
 
     <ImageView
         android:id="@+id/music_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="168dp"
         android:layout_marginTop="147dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginBottom="517dp"
         android:src="@drawable/category_music"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/travel_image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/health_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/travel_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="296dp"
         android:layout_marginTop="147dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="517dp"
         android:src="@drawable/category_travel"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/music_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/book_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="278dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginBottom="386dp"
         android:src="@drawable/category_book"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline13"
+        app:layout_constraintEnd_toStartOf="@+id/language_image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/study_image" />
 
     <ImageView
         android:id="@+id/language_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="294dp"
-        android:layout_marginTop="275dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="389dp"
         android:src="@drawable/category_language"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/book_image" />
 
     <ImageView
         android:id="@+id/game_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="405dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginBottom="259dp"
         android:src="@drawable/category_game"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintEnd_toStartOf="@+id/volunteer_image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/culcturl_image" />
 
     <ImageView
         android:id="@+id/photo_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="535dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginBottom="129dp"
         android:src="@drawable/category_photo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/drive_image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/pet_image" />
 
     <TextView
         android:id="@+id/Text_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="191dp"
-        android:layout_marginTop="355dp"
-        android:layout_marginEnd="194dp"
-        android:layout_marginBottom="357dp"
+        android:layout_marginStart="192dp"
         android:text="독서"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
         android:id="@+id/Text_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="177dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginBottom="488dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
         android:text="음악/악기"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/music_image"
+        app:layout_constraintTop_toBottomOf="@+id/music_image" />
 
     <TextView
         android:id="@+id/Text_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="314dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="71dp"
-        android:layout_marginBottom="488dp"
         android:text="여행"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/travel_image" />
 
     <TextView
         android:id="@+id/Text_6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="301dp"
-        android:layout_marginTop="352dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="360dp"
+        android:layout_marginEnd="63dp"
         android:text="  외국어"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Text_12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="301dp"
-        android:layout_marginTop="612dp"
-        android:layout_marginEnd="58dp"
-        android:layout_marginBottom="100dp"
-        android:text="드라이브"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Text_11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="612dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="100dp"
-        android:text="사진/영상"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
         android:id="@+id/Text_8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="170dp"
-        android:layout_marginTop="482dp"
-        android:layout_marginEnd="177dp"
-        android:layout_marginBottom="230dp"
         android:text="  게임/오락"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
         android:id="@+id/Text_9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="315dp"
-        android:layout_marginTop="482dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="230dp"
         android:text="봉사"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <ImageView
         android:id="@+id/pet_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="534dp"
-        android:layout_marginEnd="293dp"
-        android:layout_marginBottom="130dp"
         android:src="@drawable/category_pet"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/photo_image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/Text_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="58dp"
-        android:layout_marginTop="611dp"
-        android:layout_marginEnd="301dp"
-        android:layout_marginBottom="101dp"
+        android:layout_marginStart="59dp"
         android:text="반려동물"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/Text_11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="175dp"
+        android:text="사진/영상"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/Text_12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:text="드라이브"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
     <TextView
         android:id="@+id/Text_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="49dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="292dp"
-        android:layout_marginBottom="488dp"
+        android:layout_marginTop="11dp"
         android:text="운동/스포츠"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/health_image" />
 
     <ImageView
         android:id="@+id/study_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="275dp"
-        android:layout_marginEnd="293dp"
-        android:layout_marginBottom="389dp"
         android:src="@drawable/category_study"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline13"
+        app:layout_constraintEnd_toStartOf="@+id/book_image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/Text_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="59dp"
-        android:layout_marginTop="352dp"
-        android:layout_marginEnd="306dp"
-        android:layout_marginBottom="360dp"
         android:text="  스터디"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <ImageView
         android:id="@+id/culcturl_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="405dp"
-        android:layout_marginEnd="293dp"
-        android:layout_marginBottom="259dp"
         android:src="@drawable/category_culcture"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintEnd_toStartOf="@+id/game_image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/Text_7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="482dp"
-        android:layout_marginEnd="284dp"
-        android:layout_marginBottom="230dp"
+        android:layout_marginStart="41dp"
         android:text="문화/공연/축제"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <ImageView
         android:id="@+id/health_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginStart="51dp"
         android:layout_marginTop="147dp"
-        android:layout_marginEnd="293dp"
-        android:layout_marginBottom="517dp"
         android:src="@drawable/category_health"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/music_image"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -360,73 +266,137 @@
         android:id="@+id/text0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="650dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
         android:text="광진구"
         android:textColor="@color/white"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/bookmark_image"
+        android:id="@+id/alarm_image"
         android:layout_width="33dp"
         android:layout_height="33dp"
-        android:layout_marginStart="347dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="658dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="29dp"
         android:src="@drawable/top_alarm"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/new_alarm_image"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="347dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="658dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="26dp"
         android:src="@drawable/top_alarmnew"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/star_bookmark_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="311dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="661dp"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="38dp"
         android:src="@drawable/top_bookmark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/alarm_image"
+        app:layout_constraintStart_toEndOf="@+id/search_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/search_image"
-        android:layout_width="29dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginBottom="662dp"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="38dp"
         android:src="@drawable/top_search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        tools:layout_editor_absoluteY="731dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/text0"
+        app:layout_constraintGuide_begin="71dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="343dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="347dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="366dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="473dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="482dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="502dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="597dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="603dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="622dp" />
 
 </android.support.constraint.ConstraintLayout>

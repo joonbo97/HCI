@@ -14,7 +14,7 @@ import retrofit2.http.POST
 interface RetroInterface {
 
     companion object {
-        private const val BASE_URL = "http://ip-172-31-39-220.ap-northeast-2.compute.internal:3000";
+        private const val BASE_URL = "http://ec2-54-180-114-74.ap-northeast-2.compute.amazonaws.com:3000/";
 
         fun create():RetroInterface{
             val gson : Gson = GsonBuilder().setLenient().create();
@@ -31,7 +31,6 @@ interface RetroInterface {
     fun register(
         @Body jsonparms : RegisterModel
     ) : Call<RegisterResult>
-
 
 
 

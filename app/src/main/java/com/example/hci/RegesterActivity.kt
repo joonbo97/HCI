@@ -3,11 +3,20 @@ package com.example.hci
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.hci.data.model.RegisterModel
+import com.example.hci.data.model.RegisterResult
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.regex.Pattern
+
 
 class RegesterActivity : AppCompatActivity() {
 
@@ -152,11 +161,37 @@ class RegesterActivity : AppCompatActivity() {
                 //TODO() //각 항목별 문제가 있을 때
             }
             else {
-                //모든 값이 OK 되었을 경우
+
+                id = editID.text.toString()
+                name = editName.text.toString()
+                email = editEmail.text.toString()
+
+                Register(RegisterModel(id, pw, name, email))
+
+                //다음페이지 넘어감
                 val intent = Intent(this, SetlocationActivity::class.java)
                 startActivity(intent)
             }
         }
 
+    }
+    fun Register(registerModel : RegisterModel){
+        val api=RetroInterface.create()
+        api.register(registerModel).enqueue(object : Callback<RegisterResult> {
+            override fun onResponse(
+                call: Call<RegisterResult>,
+                response: Response<RegisterResult>
+            ) {
+                if(response.isSuccessful()){
+                    Log.d("Response: ", response.body().toString())
+                }else{
+                    Log.d("Response FAILURE", response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<RegisterResult>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+            }
+        })
     }
 }

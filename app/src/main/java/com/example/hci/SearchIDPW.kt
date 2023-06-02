@@ -1,13 +1,10 @@
 package com.example.hci
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
-import android.widget.TableLayout
 import com.example.hci.Searchidpw.SearchIDFragment
 import com.example.hci.Searchidpw.SearchIDPWAdapter
 import com.example.hci.Searchidpw.SearchPWFragment

@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         val flagAlarm = MainActivity().flagAlarm
 
         val text1 :TextView = root.findViewById(R.id.text0)
-        val ImageAlarm :ImageView = root.findViewById(R.id.bookmark_image)
+        val ImageAlarm :ImageView = root.findViewById(R.id.alarm_image)
         val ImageAlarmNew :ImageView = root.findViewById(R.id.new_alarm_image)
 
         if(!flagLogin)

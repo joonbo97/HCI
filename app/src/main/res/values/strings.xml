@@ -29,4 +29,5 @@
     <string name="title_activity_regester">RegesterActivity</string>
     <string name="title_activity_setlocation">SetlocationActivity</string>
     <string name="title_activity_makegroup">MakegroupActivity</string>
+    <string name="title_activity_myfriend2">MyfriendActivity2</string>
 </resources>
