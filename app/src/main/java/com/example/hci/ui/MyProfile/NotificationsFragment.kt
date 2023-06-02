@@ -8,9 +8,10 @@ import android.widget.TextView
 import android.support.v4.app.Fragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.widget.ImageView
-import com.example.hci.MainActivity
-import com.example.hci.R
+import com.example.hci.*
+import com.example.hci.ui.login.LoginActivity
 
 class NotificationsFragment : Fragment() {
 
@@ -31,8 +32,8 @@ class NotificationsFragment : Fragment() {
         val emailText :TextView= root.findViewById(R.id.myemail_text)
 
         val editimage :ImageView = root.findViewById(R.id.edit_btn)
-        val chatimage :ImageView = root.findViewById(R.id.friend_image)
-        val friendimage :ImageView = root.findViewById(R.id.chat_image)
+        val chatimage :ImageView = root.findViewById(R.id.chat_image)
+        val friendimage :ImageView = root.findViewById(R.id.friend_image)
 
 
 
@@ -61,6 +62,11 @@ class NotificationsFragment : Fragment() {
             editimage.visibility = View.INVISIBLE
             chatimage.visibility = View.INVISIBLE
             friendimage.visibility = View.INVISIBLE
+
+            root.setOnClickListener {
+                val intent = Intent(activity, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
         else
         {
@@ -69,6 +75,16 @@ class NotificationsFragment : Fragment() {
             chatimage.visibility = View.VISIBLE
             friendimage.visibility = View.VISIBLE
         }
+
+        friendimage.setOnClickListener {
+            val intent = Intent(activity, MyfriendActivity::class.java)
+            startActivity(intent)
+        }
+        chatimage.setOnClickListener {
+            val intent = Intent(activity, ChatActivity::class.java)
+            startActivity(intent)
+        }
+
 
         return root
     }

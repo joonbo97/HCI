@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hci" >
+    package="com.example.hci">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,12 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HCI"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MyfriendActivity"
             android:exported="false"
             android:label="@string/title_activity_myfriend2"
             android:theme="@style/Theme.HCI.NoActionBar" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
         <activity
             android:name=".MakegroupActivity"
             android:label="@string/title_activity_makegroup"
@@ -54,7 +57,7 @@
             android:theme="@style/Theme.HCI.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

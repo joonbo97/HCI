@@ -14,7 +14,6 @@ class AlarmActivity : AppCompatActivity() {
         setContentView(R.layout.activity_alarm)
 
         val image1: ImageView = findViewById(R.id.back_image)
-
         image1.setOnClickListener {
             finish()
         }
