@@ -36,7 +36,6 @@ class RegesterActivity : AppCompatActivity() {
         var name :String
         var email :String
         var emailcode :String
-        var tempedit: EditText
 
         val editID :EditText = findViewById(R.id.editID)
         val editPW :EditText = findViewById(R.id.editPW)
@@ -175,7 +174,7 @@ class RegesterActivity : AppCompatActivity() {
         }
 
     }
-    fun Register(registerModel : RegisterModel){
+    private fun Register(registerModel : RegisterModel){
         val api=RetroInterface.create()
         api.register(registerModel).enqueue(object : Callback<RegisterResult> {
             override fun onResponse(
@@ -184,13 +183,17 @@ class RegesterActivity : AppCompatActivity() {
             ) {
                 if(response.isSuccessful()){
                     Log.d("Response: ", response.body().toString())
+                    Toast.makeText(this@RegesterActivity, "성공", Toast.LENGTH_SHORT).show()
                 }else{
                     Log.d("Response FAILURE", response.body().toString())
+                    Toast.makeText(this@RegesterActivity, "실패", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<RegisterResult>, t: Throwable) {
+                Toast.makeText(this@RegesterActivity, "연결 실패", Toast.LENGTH_SHORT).show()
                 Log.d("CONNECTION FAILURE :", t.localizedMessage)
+
             }
         })
     }

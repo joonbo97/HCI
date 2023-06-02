@@ -26,6 +26,7 @@ class SelectCategory : AppCompatActivity() {
         val ImageMakeGroup: ImageView = findViewById(R.id.makegroup_img)
         ImageMakeGroup.setOnClickListener {
             val intent = Intent(this, MakegroupActivity::class.java)
+            intent.putExtra("categoryIDX", categoryIDX)
             startActivity(intent)
         }
     }

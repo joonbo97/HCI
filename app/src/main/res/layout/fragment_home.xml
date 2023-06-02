@@ -35,7 +35,7 @@
         android:src="@drawable/category_music"
         app:layout_constraintEnd_toStartOf="@+id/travel_image"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/health_image"
+        app:layout_constraintStart_toEndOf="@+id/icon_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -207,7 +207,7 @@
         android:text="운동/스포츠"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/health_image" />
+        app:layout_constraintTop_toBottomOf="@+id/icon_image" />
 
     <ImageView
         android:id="@+id/study_image"
@@ -252,7 +252,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <ImageView
-        android:id="@+id/health_image"
+        android:id="@+id/icon_image"
         android:layout_width="67dp"
         android:layout_height="67dp"
         android:layout_marginTop="147dp"

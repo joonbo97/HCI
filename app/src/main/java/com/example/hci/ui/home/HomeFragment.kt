@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
         }
 
         //카테고리 버튼
-        val ImageHealth: ImageView = root.findViewById(R.id.health_image)
+        val ImageHealth: ImageView = root.findViewById(R.id.icon_image)
         val ImageMusic: ImageView = root.findViewById(R.id.music_image)
         val ImageTravel: ImageView = root.findViewById(R.id.travel_image)
         val ImageStudy: ImageView = root.findViewById(R.id.study_image)
@@ -180,12 +180,6 @@ class HomeFragment : Fragment() {
             val intent = Intent(activity, SearchActivity::class.java)
             startActivity(intent)
         }
-
-/*
-        뷰 의 아무 곳이나 클릭하면 실행
-        root.setOnClickListener {
-            Toast.makeText(activity, "클릭됨", Toast.LENGTH_SHORT).show()
-        }*/
 
         return root
     }

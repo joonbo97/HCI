@@ -8,7 +8,7 @@
     tools:context=".MakegroupActivity">
 
     <ImageView
-        android:id="@+id/health_image"
+        android:id="@+id/icon_image"
         android:layout_width="21dp"
         android:layout_height="21dp"
         android:layout_marginStart="34dp"
