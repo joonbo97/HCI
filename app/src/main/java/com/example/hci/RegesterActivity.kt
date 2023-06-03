@@ -8,18 +8,15 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
-import com.example.hci.data.model.RegisterModel
-import com.example.hci.data.model.RegisterResult
+import com.example.hci.data.model.Register.RegisterModel
+import com.example.hci.data.model.Register.RegisterResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.regex.Pattern
 
 
 class RegesterActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_regester)
@@ -166,10 +163,6 @@ class RegesterActivity : AppCompatActivity() {
                 email = editEmail.text.toString()
 
                 Register(RegisterModel(id, pw, name, email))
-
-                //다음페이지 넘어감
-                val intent = Intent(this, SetlocationActivity::class.java)
-                startActivity(intent)
             }
         }
 
@@ -177,23 +170,25 @@ class RegesterActivity : AppCompatActivity() {
     private fun Register(registerModel : RegisterModel){
         val api=RetroInterface.create()
         api.register(registerModel).enqueue(object : Callback<RegisterResult> {
-            override fun onResponse(
-                call: Call<RegisterResult>,
-                response: Response<RegisterResult>
-            ) {
+            override fun onResponse(call: Call<RegisterResult>,response: Response<RegisterResult>) {
                 if(response.isSuccessful()){
                     Log.d("Response: ", response.body().toString())
-                    Toast.makeText(this@RegesterActivity, "성공", Toast.LENGTH_SHORT).show()
-                }else{
+                    Toast.makeText(this@RegesterActivity, "회원가입 성공 지역을 선택해주세요.", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this@RegesterActivity, SetlocationActivity::class.java)
+                    intent.putExtra("uid", registerModel.id)
+                    startActivity(intent)
+                }
+                else
+                {
                     Log.d("Response FAILURE", response.body().toString())
-                    Toast.makeText(this@RegesterActivity, "실패", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegesterActivity, "회원가입에 실패했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<RegisterResult>, t: Throwable) {
-                Toast.makeText(this@RegesterActivity, "연결 실패", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegesterActivity, "연결 실패. 인터넷 연결을 확인하세요.", Toast.LENGTH_SHORT).show()
                 Log.d("CONNECTION FAILURE :", t.localizedMessage)
-
             }
         })
     }

@@ -12,7 +12,7 @@ import com.example.hci.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
-    var flagLogin = true
+    var flagLogin = false
     var flagAlarm = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

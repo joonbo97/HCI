@@ -1,14 +1,19 @@
 package com.example.hci
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
+import android.widget.*
+import com.example.hci.data.model.Setlocation.SetlocationModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SetlocationActivity : AppCompatActivity() {
 
@@ -64,5 +69,79 @@ class SetlocationActivity : AppCompatActivity() {
             }
 
         }
+
+
+        val doneimg :ImageButton = findViewById(R.id.nextbtn)
+        doneimg.setOnClickListener {
+            val city :String = spinnerCity.selectedItem.toString()
+            val city2 :String = spinnerCity2.selectedItem.toString()
+            var uid = intent.getStringExtra("uid")
+            if(uid == null)
+                uid = "Error"
+
+            //SetLocation(SetlocationModel(city, city2, uid))
+            SetLocation2(SetlocationModel(city, city2, uid))
+        }
+
+
+    }
+
+    private fun SetLocation(setlocationModel :SetlocationModel)
+    {
+        val api = RetroInterface.create()
+        api.setlocation(setlocationModel).enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.isSuccessful()){
+                    Log.d("Response: ", response.body().toString())
+                    Toast.makeText(this@SetlocationActivity, "지역설정 완료.", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this@SetlocationActivity, MainActivity::class.java)
+                    startActivity(intent)
+                }
+                else
+                {
+                    Log.d("Response FAILURE", response.body().toString())
+                    Toast.makeText(this@SetlocationActivity, "지역설정에 실패했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Toast.makeText(this@SetlocationActivity, "연결 실패. 인터넷 연결을 확인하세요.", Toast.LENGTH_SHORT).show()
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+            }
+
+        })
+
+    }
+
+    private fun SetLocation2(setlocationModel: SetlocationModel)
+    {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://ec2-54-180-114-74.ap-northeast-2.compute.amazonaws.com:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val retroInterface = retrofit.create(RetroInterface::class.java)
+
+        val call = retroInterface.setlocation(setlocationModel)
+
+        call.enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    val result = response.body() // 성공적인 응답 받았을 때 처리
+                    Log.d("TAG", "Response: $result")
+                    Toast.makeText(this@SetlocationActivity, "지역설정 완료.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Log.e("TAG", "Response error: ${response.code()}")
+                    Toast.makeText(this@SetlocationActivity, "지역설정에 실패했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.e("TAG", "Request failed: ${t.message}")
+                Toast.makeText(this@SetlocationActivity, "연결 실패. 인터넷 연결을 확인하세요.", Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 }

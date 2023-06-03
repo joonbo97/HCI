@@ -1,7 +1,8 @@
 package com.example.hci
 
-import com.example.hci.data.model.RegisterModel
-import com.example.hci.data.model.RegisterResult
+import com.example.hci.data.model.Register.RegisterModel
+import com.example.hci.data.model.Register.RegisterResult
+import com.example.hci.data.model.Setlocation.SetlocationModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -25,10 +26,19 @@ interface RetroInterface {
 
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(provideOkHttpClient(AppInterceptor()))
+                //.client(provideOkHttpClient(AppInterceptor()))
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(RetroInterface::class.java);
+        }
+
+        fun create2(){
+            val retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val retroInterface = retrofit.create(RetroInterface::class.java)
         }
 
         fun provideOkHttpClient(interceptor: AppInterceptor): OkHttpClient
@@ -53,4 +63,8 @@ interface RetroInterface {
         @Body jsonparams: RegisterModel
     ) : Call<RegisterResult>
 
+    @POST("/user/location")
+    fun setlocation(
+        @Body jsonparams: SetlocationModel
+    ) : Call<String>
 }
