@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.support.v4.app.Fragment
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.widget.ImageView
 import com.example.hci.*
 import com.example.hci.ui.login.LoginActivity
+import java.io.FileNotFoundException
+import java.io.InputStream
 
 class NotificationsFragment : Fragment() {
 
@@ -58,6 +62,8 @@ class NotificationsFragment : Fragment() {
                 starimg.setImageResource(R.drawable.star1_5)
             else if(point >= 1.0)
                 starimg.setImageResource(R.drawable.star1)
+            else
+                starimg.setImageResource(R.drawable.star0_5)
         }
 
 

@@ -15,6 +15,16 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var flagLogin = false
         var flagAlarm = false
+
+        var uid :Int = -1
+        var name : String = ""
+        var score : Double = 0.0
+        var location_id : Int = 0
+        var email : String = ""
+
+
+        var city :String = "서울특별시"
+        var district :String = "광진구"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

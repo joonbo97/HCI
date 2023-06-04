@@ -3,10 +3,23 @@ package com.example.hci
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.view.View
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.hci.data.model.GroupIdListModel
+import com.example.hci.data.model.GroupIdListResult
+import com.example.hci.data.model.GroupInfoModel
+import com.example.hci.data.model.GroupInfoResult
 
 class SelectCategory : AppCompatActivity() {
+    lateinit var groupinfoadapter :GroupInfoAdapter
+    val data = mutableListOf<GroupInfoResult>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +37,102 @@ class SelectCategory : AppCompatActivity() {
         }
 
         val ImageMakeGroup: ImageView = findViewById(R.id.makegroup_img)
+
+        if(!MainActivity.flagLogin)//로그인 상태 아니라면 모임만들기 버튼 숨김
+            ImageMakeGroup.visibility = View.INVISIBLE
+        else
+            ImageMakeGroup.visibility = View.VISIBLE
+
         ImageMakeGroup.setOnClickListener {
             val intent = Intent(this, MakegroupActivity::class.java)
             intent.putExtra("categoryIDX", categoryIDX)
             startActivity(intent)
         }
+
+
+
+        //getGroupInfo()
+
+        //TODO 리사이클러 뷰
+        if(MainActivity.flagLogin)//로그인 상태라면
+        {
+            initRecycler()
+        }
+    }
+
+    private fun getGroupidList(groupIdListModel : GroupIdListModel){
+        val api=RetroInterface.create()
+        api.groupIdList(groupIdListModel).enqueue(object : Callback<List<GroupIdListResult>> {
+            override fun onResponse(call: Call<List<GroupIdListResult>>,response: Response<List<GroupIdListResult>>) {
+                if(response.isSuccessful()){
+                    Log.d("Response:", response.body().toString())
+                }
+                else
+                {
+                    Log.d("Response FAILURE", response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<List<GroupIdListResult>>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+            }
+        })
+    }
+
+    private fun getGroupInfo(groupInfoModel: GroupInfoModel){
+        val api = RetroInterface.create()
+        api.groupInfo(groupInfoModel).enqueue(object : Callback<List<GroupInfoResult>> {
+            override fun onResponse(call: Call<List<GroupInfoResult>>, response: Response<List<GroupInfoResult>>) {
+                if (response.isSuccessful) {
+                    val groupInfoList = response.body()
+                    groupinfoadapter.data.clear()
+                    if (groupInfoList != null) {
+                        groupinfoadapter.data.addAll(groupInfoList)
+                    }
+                    groupinfoadapter.notifyDataSetChanged()
+                    Log.d("Response:", response.body().toString())
+                } else {
+                    Log.d("Response FAILURE", response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<List<GroupInfoResult>>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+            }
+        })
+    }
+
+    private fun initRecycler() {
+        val recyclerView: RecyclerView = findViewById(R.id.SelectCategory_RecyclerView)
+
+        groupinfoadapter = GroupInfoAdapter(this)
+        recyclerView.adapter = groupinfoadapter
+
+        data.apply {
+            add(GroupInfoResult("1번 모임", 4.4, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("2번 모임", 3.4, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("3번 모임", 2.6, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("4번 모임", 1.4, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("5번 모임", 5.0, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("6번 모임", 4.6, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("7번 모임", 3.6, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("8번 모임", 2.2, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("9번 모임", 1.6, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+            add(GroupInfoResult("10번 모임", 5.0, "관리자", 3, 4, "설명", "2020-11-23",
+                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
+        }
+
+        groupinfoadapter.data.addAll(data)
+        groupinfoadapter.notifyDataSetChanged()//변경감지
     }
 }
 

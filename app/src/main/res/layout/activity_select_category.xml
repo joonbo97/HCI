@@ -43,4 +43,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/newgroup" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/SelectCategory_RecyclerView"
+        android:layout_width="385dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="123dp"
+        android:orientation="vertical"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

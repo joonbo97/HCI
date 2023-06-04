@@ -176,10 +176,7 @@ class RegesterActivity : AppCompatActivity() {
                     val uid : Int = registerresult!!.uid
                     if(uid != -1) {
                         Toast.makeText(
-                            this@RegesterActivity,
-                            "회원가입 성공 지역을 선택해주세요. $uid",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            this@RegesterActivity, "회원가입 성공 지역을 선택해주세요. $uid", Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(this@RegesterActivity, SetlocationActivity::class.java)
                         intent.putExtra("uid", uid)
@@ -187,11 +184,7 @@ class RegesterActivity : AppCompatActivity() {
                     }
                     else
                     {
-                        Toast.makeText(
-                            this@RegesterActivity,
-                            "ID가 중복되었습니다. 다른 ID로 시도해주세요.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@RegesterActivity, "ID가 중복되었습니다. 다른 ID로 시도해주세요.", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else

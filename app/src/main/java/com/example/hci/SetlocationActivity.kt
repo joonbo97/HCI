@@ -95,12 +95,13 @@ class SetlocationActivity : AppCompatActivity() {
                 val city: String = spinnerCity.selectedItem.toString()
                 val district: String = spinnerCity2.selectedItem.toString()
 
+                MainActivity.city = city
+                MainActivity.district = district
 
-                /*val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                intent.putExtra("district", district)
                 startActivity(intent)
-                finish()*/
+                finish()
             }
         }
         else

@@ -9,6 +9,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.hci.*
 import com.example.hci.ui.login.LoginActivity
 
@@ -37,6 +38,10 @@ class HomeFragment : Fragment() {
         if(!flagLogin)
         {
             text1.text = "로그인하세요"
+        }
+        else
+        {
+            text1.text = MainActivity.district
         }
 
         if(flagAlarm)//알람이 있으면 true
@@ -182,5 +187,9 @@ class HomeFragment : Fragment() {
         }
 
         return root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
