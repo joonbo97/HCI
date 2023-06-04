@@ -27,8 +27,8 @@ class HomeFragment : Fragment() {
                 ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val flagLogin = MainActivity().flagLogin
-        val flagAlarm = MainActivity().flagAlarm
+        val flagLogin = MainActivity.flagLogin
+        val flagAlarm = MainActivity.flagAlarm
 
         val text1 :TextView = root.findViewById(R.id.text0)
         val ImageAlarm :ImageView = root.findViewById(R.id.alarm_image)
@@ -58,10 +58,10 @@ class HomeFragment : Fragment() {
             }
             else
             {
-                //TODO 지역 변경 액티비티로 넘어가야 한다.
+                val intent = Intent(activity, SetlocationActivity::class.java)
+                startActivity(intent)
             }
         }
-
         //카테고리 버튼
         val ImageHealth: ImageView = root.findViewById(R.id.icon_image)
         val ImageMusic: ImageView = root.findViewById(R.id.music_image)

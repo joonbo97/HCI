@@ -32,15 +32,6 @@ interface RetroInterface {
                 .create(RetroInterface::class.java);
         }
 
-        fun create2(){
-            val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val retroInterface = retrofit.create(RetroInterface::class.java)
-        }
-
         fun provideOkHttpClient(interceptor: AppInterceptor): OkHttpClient
                 = OkHttpClient.Builder().run {
             addInterceptor(interceptor)

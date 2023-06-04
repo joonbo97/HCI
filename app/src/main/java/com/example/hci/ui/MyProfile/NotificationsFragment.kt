@@ -26,7 +26,7 @@ class NotificationsFragment : Fragment() {
                 ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(NotificationsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
 
-        val flagLogin = MainActivity().flagLogin
+        val flagLogin = MainActivity.flagLogin
         val nameText :TextView= root.findViewById(R.id.myname_text)
         val locationText :TextView= root.findViewById(R.id.mylocation_text)
         val emailText :TextView= root.findViewById(R.id.myemail_text)
@@ -93,6 +93,10 @@ class NotificationsFragment : Fragment() {
             startActivity(intent)
         }
 
+        editimage.setOnClickListener {
+            val intent = Intent(activity, EditprofileActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
     }

@@ -12,91 +12,86 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-
-import com.example.hci.R
-import com.example.hci.RegesterActivity
-import com.example.hci.SearchIDPW
-import com.example.hci.SelectCategory
+import com.example.hci.*
 
 class LoginActivity : AppCompatActivity() {
-
-    private lateinit var loginViewModel: LoginViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<ImageButton>(R.id.login)
-        val loading = findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-                .get(LoginViewModel::class.java)
-
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
-            val loginState = it ?: return@Observer
-
-            // disable login button unless both username / password is valid
-            login.isEnabled = loginState.isDataValid
-
-            if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
+        username.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //TODO("Not yet implemented")
             }
-            if (loginState.passwordError != null) {
-                password.error = getString(loginState.passwordError)
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //TODO
             }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val inputText = p0.toString()
+                if(inputText.length < 5)
+                    username.error = "5글자 이상 입력해주세요."
+                else if(inputText.length > 10)
+                    username.error = "10글자 이하로 입력해주세요."
+            }
+
         })
 
-        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
-            val loginResult = it ?: return@Observer
-
-            loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
+        password.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //TODO("Not yet implemented")
             }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-            }
-            setResult(Activity.RESULT_OK)
 
-            //Complete and destroy login activity once successful
-            finish()
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //TODO("Not yet implemented")
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val inputText = p0.toString()
+                if(inputText.length < 5)
+                    password.error = "5글자 이상 입력해주세요."
+                else if(inputText.length > 10)
+                    password.error = "10글자 이하로 입력해주세요."
+            }
+
         })
 
-        username.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
-            )
-        }
-
-        password.apply {
-            afterTextChanged {
-                loginViewModel.loginDataChanged(
-                        username.text.toString(),
-                        password.text.toString()
-                )
+        login.setOnClickListener{
+            if(username.length() < 5 || username.length() > 10) //id의 형식 맞지않음
+            {
+                Toast.makeText(this, "아이디는 5~10글자입니다.", Toast.LENGTH_SHORT).show()
             }
+            else if(password.length() < 5 || password.length() > 10)//pw의 형식 맞지않음
+            {
+                Toast.makeText(this, "비밀번호는 5~10글자입니다.", Toast.LENGTH_SHORT).show()
+            }
+            else//형식 문제 없음
+            {
+                val id = username.text.toString()
+                val pw = password.text.toString()
 
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
-                                username.text.toString(),
-                                password.text.toString()
-                        )
+                //이를 로그인 실행
+
+                if(false) //Login Error
+                {
+                    //TODO 로그인 문제 생겼을 때 처리
                 }
-                false
-            }
-
-            login.setOnClickListener {
-                loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                else //Login OK
+                {
+                    Toast.makeText(this, "${id}님 환영합니다", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    MainActivity.flagLogin = true
+                    intent.putExtra("id", id)
+                    startActivity(intent)
+                }
             }
         }
-
 
         val ImageSearchIDPW: ImageView = findViewById(R.id.SearchIDPW)
         ImageSearchIDPW.setOnClickListener {
@@ -110,31 +105,4 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-                applicationContext,
-                "$welcome $displayName",
-                Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
-}
-
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
 }

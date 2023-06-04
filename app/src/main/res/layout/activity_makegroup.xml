@@ -211,18 +211,16 @@
         android:id="@+id/grouptype_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="281dp"
-        android:layout_marginEnd="254dp"
-        android:layout_marginBottom="423dp"
+        android:layout_marginStart="1dp"
         android:text="운동/스포츠"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingStart="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/groupname_box"
+        app:layout_constraintStart_toEndOf="@+id/icon_image"
+        app:layout_constraintTop_toBottomOf="@+id/endtime_text"
+        app:layout_constraintVertical_bias="0.5" />
 
     <ImageView
         android:id="@+id/local_box"

@@ -12,8 +12,10 @@ import com.example.hci.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
-    var flagLogin = false
-    var flagAlarm = false
+    companion object {
+        var flagLogin = false
+        var flagAlarm = false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

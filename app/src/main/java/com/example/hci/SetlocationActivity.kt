@@ -21,25 +21,22 @@ class SetlocationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setlocation)
 
-        val imageback : ImageView = findViewById(R.id.back_image)
-        imageback.setOnClickListener {
-            finish()
-        }
+        val spinnerCity: Spinner = findViewById(R.id.spinnerCity)
+        val spinnerCity2: Spinner = findViewById(R.id.spinnerCity2)
+        spinnerCity.adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.cities,
+            android.R.layout.simple_spinner_dropdown_item
+        )
 
-        val spinnerCity : Spinner = findViewById(R.id.spinnerCity)
-        val spinnerCity2 : Spinner = findViewById(R.id.spinnerCity2)
-        spinnerCity.adapter = ArrayAdapter.createFromResource(this, R.array.cities, android.R.layout.simple_spinner_dropdown_item)
-
-        spinnerCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
-        {
+        spinnerCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                val adapterResourceID = when(position)
-                {
+                val adapterResourceID = when (position) {
                     0 -> R.array.city0
                     1 -> R.array.city1
                     2 -> R.array.city2
@@ -60,7 +57,11 @@ class SetlocationActivity : AppCompatActivity() {
                     else -> R.array.city0
                 }
 
-                spinnerCity2.adapter = ArrayAdapter.createFromResource(this@SetlocationActivity, adapterResourceID, android.R.layout.simple_spinner_dropdown_item)
+                spinnerCity2.adapter = ArrayAdapter.createFromResource(
+                    this@SetlocationActivity,
+                    adapterResourceID,
+                    android.R.layout.simple_spinner_dropdown_item
+                )
 
             }
 
@@ -70,20 +71,55 @@ class SetlocationActivity : AppCompatActivity() {
 
         }
 
-
-        val doneimg :ImageButton = findViewById(R.id.nextbtn)
-        doneimg.setOnClickListener {
-            val city :String = spinnerCity.selectedItem.toString()
-            val city2 :String = spinnerCity2.selectedItem.toString()
-            var uid = intent.getStringExtra("uid")
-            if(uid == null)
-                uid = "Error"
-
-            //SetLocation(SetlocationModel(city, city2, uid))
-            SetLocation2(SetlocationModel(city, city2, uid))
+        val imageback: ImageView = findViewById(R.id.back_image)
+        imageback.setOnClickListener {
+            finish()
         }
 
+        //스피너, 뒤로가기 버튼 세팅완료
 
+
+        //Login에 따른 Activity변경
+        if (MainActivity.flagLogin) //로그인 되어있으면 수정모드
+        {
+            val title :TextView = findViewById(R.id.setlocation_text)
+            title.text = "내 지역 수정"
+
+            val btn :ImageButton = findViewById(R.id.nextbtn)
+            btn.setImageResource(R.drawable.editlocation_done)
+
+            btn.setOnClickListener{
+                //TODO 수정완료 눌렀을때 변경된 지역 정보를 서버로 전달하여 저장해야함.
+                //TODO intent 로 spinner값 받아서 앞으로 보내야 함 (스피너 값 변경 가능할 수도 있어서 냅둿음)
+
+                val city: String = spinnerCity.selectedItem.toString()
+                val district: String = spinnerCity2.selectedItem.toString()
+
+
+                /*val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.putExtra("district", district)
+                startActivity(intent)
+                finish()*/
+            }
+        }
+        else
+        {
+            val doneimg: ImageButton = findViewById(R.id.nextbtn)
+            doneimg.setOnClickListener {
+                val city: String = spinnerCity.selectedItem.toString()
+                val district: String = spinnerCity2.selectedItem.toString()
+                val uid = intent.getIntExtra("uid", -1)
+                Toast.makeText(this, "UDI : $uid", Toast.LENGTH_SHORT).show()
+                if (uid == -1) {
+                    //TODO
+                } else {
+                    SetLocation(SetlocationModel(city, district, uid))
+                }
+            }
+
+
+        }
     }
 
     private fun SetLocation(setlocationModel :SetlocationModel)
@@ -91,7 +127,8 @@ class SetlocationActivity : AppCompatActivity() {
         val api = RetroInterface.create()
         api.setlocation(setlocationModel).enqueue(object : Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                if(response.isSuccessful()){
+                if(response.isSuccessful())
+                {
                     Log.d("Response: ", response.body().toString())
                     Toast.makeText(this@SetlocationActivity, "지역설정 완료.", Toast.LENGTH_SHORT).show()
 
@@ -112,36 +149,5 @@ class SetlocationActivity : AppCompatActivity() {
 
         })
 
-    }
-
-    private fun SetLocation2(setlocationModel: SetlocationModel)
-    {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://ec2-54-180-114-74.ap-northeast-2.compute.amazonaws.com:3000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val retroInterface = retrofit.create(RetroInterface::class.java)
-
-        val call = retroInterface.setlocation(setlocationModel)
-
-        call.enqueue(object : Callback<String>{
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response.isSuccessful) {
-                    val result = response.body() // 성공적인 응답 받았을 때 처리
-                    Log.d("TAG", "Response: $result")
-                    Toast.makeText(this@SetlocationActivity, "지역설정 완료.", Toast.LENGTH_SHORT).show()
-                } else {
-                    Log.e("TAG", "Response error: ${response.code()}")
-                    Toast.makeText(this@SetlocationActivity, "지역설정에 실패했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.e("TAG", "Request failed: ${t.message}")
-                Toast.makeText(this@SetlocationActivity, "연결 실패. 인터넷 연결을 확인하세요.", Toast.LENGTH_SHORT).show()
-            }
-
-        })
     }
 }

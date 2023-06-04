@@ -172,12 +172,27 @@ class RegesterActivity : AppCompatActivity() {
         api.register(registerModel).enqueue(object : Callback<RegisterResult> {
             override fun onResponse(call: Call<RegisterResult>,response: Response<RegisterResult>) {
                 if(response.isSuccessful()){
-                    Log.d("Response: ", response.body().toString())
-                    Toast.makeText(this@RegesterActivity, "회원가입 성공 지역을 선택해주세요.", Toast.LENGTH_SHORT).show()
+                    val registerresult = response.body()
+                    val uid : Int = registerresult!!.uid
+                    if(uid != -1) {
+                        Toast.makeText(
+                            this@RegesterActivity,
+                            "회원가입 성공 지역을 선택해주세요. $uid",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                    val intent = Intent(this@RegesterActivity, SetlocationActivity::class.java)
-                    intent.putExtra("uid", registerModel.id)
-                    startActivity(intent)
+                        val intent = Intent(this@RegesterActivity, SetlocationActivity::class.java)
+                        intent.putExtra("uid", uid)
+                        startActivity(intent)
+                    }
+                    else
+                    {
+                        Toast.makeText(
+                            this@RegesterActivity,
+                            "ID가 중복되었습니다. 다른 ID로 시도해주세요.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
                 else
                 {
