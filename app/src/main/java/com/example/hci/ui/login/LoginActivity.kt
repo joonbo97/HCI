@@ -11,10 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.widget.*
 import com.example.hci.*
-import com.example.hci.data.model.LoginModel
-import com.example.hci.data.model.LoginResult
-import com.example.hci.data.model.UserModel
-import com.example.hci.data.model.UserResult
+import com.example.hci.data.model.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,22 +77,6 @@ class LoginActivity : AppCompatActivity() {
                 //이를 통해 로그인 실행
 
                 login(LoginModel(id, pw))
-
-
-
-               /* if(false) //Login Error
-                {
-                    //TODO 로그인 문제 생겼을 때 처리
-                }
-                else //Login OK
-                {
-                    Toast.makeText(this, "${id}님 환영합니다", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    MainActivity.flagLogin = true
-                    intent.putExtra("id", id)
-                    startActivity(intent)
-                }*/
             }
         }
 
@@ -118,9 +99,6 @@ class LoginActivity : AppCompatActivity() {
         api.login(loginModel).enqueue(object : Callback<LoginResult> {
             override fun onResponse(call: Call<LoginResult>,response: Response<LoginResult>) {
                 if(response.isSuccessful()){
-                    Log.d("Response:", response.body().toString())
-
-
                     val loginresult = response.body()
                     MainActivity.uid = loginresult!!.uid
 
@@ -129,23 +107,19 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this@LoginActivity, "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show()
                     else {
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         MainActivity.flagLogin = true
 
 
                         //MainActivity.uid = response.body().toString().toInt()
 
                         //유저정보 받아옴
-                        getUserInfo(MainActivity.uid)
+                        getUserInfo(UserModel(MainActivity.uid))
 
+                        notify(NotificationModel(MainActivity.uid))
 
                         startActivity(intent)
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "${loginModel.id}님 환영합니다",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@LoginActivity, "${loginModel.id}님 환영합니다", Toast.LENGTH_SHORT).show()
                         finish()
                     }
 
@@ -166,42 +140,50 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    private fun getUserInfo(uid :Int){
+    private fun getUserInfo(userModel: UserModel){
         val api=RetroInterface.create()
-        api.user(uid).enqueue(object : Callback<UserResult> {
+        api.user(userModel).enqueue(object : Callback<UserResult> {
             override fun onResponse(call: Call<UserResult>,response: Response<UserResult>) {
-                if(response.isSuccessful()){
-                    Log.d("Response:", response.body().toString())
-//                    var id : Int,
-//                    var login_id : Int,         //안되면 String으로 변경 요망
-//                    var password : Int,         //안되면 String으로 변경 요망
-//                    var name : String,
-//                    var image : String,
-//                    var score : Double,
-//                    var location_id : Int,
-//                    var email : String,
-//                    var scoreCount : Int
+                if(response.isSuccessful){
                     val userresult = response.body()
 
                     MainActivity.name =userresult!!.name
-                    MainActivity.location_id = userresult!!.location_id
-                    MainActivity.email = userresult!!.email
-                    MainActivity.score = userresult!!.score
+                    MainActivity.location_id = userresult.location_id
+                    MainActivity.email = userresult.email
+                    MainActivity.score = userresult.score
 
-                    //유저의 city랑  district 받기
-                    //TODO
+                    MainActivity.city = MainActivity().LocationIDSearch(MainActivity.location_id)[0].toString()
+                    MainActivity.district = MainActivity().LocationIDSearch(MainActivity.location_id)[1].toString()
                 }
                 else
                 {
-                    Log.d("Response FAILURE", response.body().toString())
+                    Toast.makeText(this@LoginActivity, "유저 정보 갱신에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<UserResult>, t: Throwable) {
                 Log.d("CONNECTION FAILURE :", t.localizedMessage)
+
             }
         })
     }
 
+    private fun notify(notificationModel : NotificationModel){
+        val api=RetroInterface.create()
+        api.notification(notificationModel).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>,response: Response<String>) {
+                if(response.isSuccessful()){
+                    MainActivity.flagAlarm = response.body() != "false"
+                }
+                else
+                {
 
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+            }
+        })
+    }
 }

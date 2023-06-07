@@ -155,7 +155,7 @@
 
     <ImageView
         android:id="@+id/inboxsend"
-        android:layout_width="0dp"
+        android:layout_width="92dp"
         android:layout_height="25dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
@@ -211,7 +211,7 @@
         android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="전송받은 코드 입력"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/emailtext" />
 

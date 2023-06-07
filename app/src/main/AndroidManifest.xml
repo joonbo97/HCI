@@ -54,7 +54,7 @@
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".AlarmActivity"
+            android:name=".Alarm.AlarmActivity"
             android:label="@string/title_activity_alarm"
             android:theme="@style/Theme.HCI.NoActionBar" />
         <activity

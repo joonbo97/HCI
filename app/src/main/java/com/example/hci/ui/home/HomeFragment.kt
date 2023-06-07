@@ -9,8 +9,8 @@ import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.hci.*
+import com.example.hci.Alarm.AlarmActivity
 import com.example.hci.ui.login.LoginActivity
 
 class HomeFragment : Fragment() {
@@ -54,6 +54,7 @@ class HomeFragment : Fragment() {
             ImageAlarm.visibility = View.VISIBLE
             ImageAlarmNew.visibility = View.INVISIBLE
         }
+
         //상단 로그인, 지역 버튼 클릭 이벤트
         text1.setOnClickListener {
             if(!flagLogin)//로그인 상태가 아니라면
@@ -160,10 +161,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
-        //상단 버튼 click listener
-
         //알람 2가지 case일 경우
         ImageAlarm.setOnClickListener{
             val intent = Intent(activity, AlarmActivity::class.java)
@@ -187,9 +184,5 @@ class HomeFragment : Fragment() {
         }
 
         return root
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
     }
 }

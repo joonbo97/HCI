@@ -1,6 +1,8 @@
 package com.example.hci
 
 import com.example.hci.data.model.*
+import com.example.hci.data.model.FriendReq.FriendReqResult
+import com.example.hci.data.model.FriendReqRefuse.FriendReqRefuseModel
 import com.example.hci.data.model.Register.RegisterModel
 import com.example.hci.data.model.Register.RegisterResult
 import com.example.hci.data.model.Setlocation.SetlocationModel
@@ -12,11 +14,10 @@ import okhttp3.Response
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 import java.io.IOException
 
 interface RetroInterface {
@@ -30,7 +31,8 @@ interface RetroInterface {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 //.client(provideOkHttpClient(AppInterceptor()))
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(RetroInterface::class.java);
         }
@@ -70,40 +72,40 @@ interface RetroInterface {
         @Body jsonparams: SetlocationModel
     ) : Call<String>
 
-    @GET("/group/idList")
+    @POST("/group/idList")
     fun groupIdList(
         @Body jsonparams : GroupIdListModel
     ) : Call<List<GroupIdListResult>>
 
-    @GET("/group/info")
+    @POST("/group/info")
     fun groupInfo(
         @Body jsonparams : GroupInfoModel
-    ) : Call<List<GroupInfoResult>>
+    ) : Call<GroupInfoResult>
 
     @POST("/group/sendRequest")
     fun groupSendRequest(
         @Body jsonparms : GroupSendRequestModel
-    ) : Call<GroupSendRequestResult>
+    ) : Call<String>
 
     @POST("/group/reqList")
     fun groupReqList(
         @Body jsonparms : GroupReqListModel
-    ) : Call<GroupReqListResult>
+    ) : Call<List<GroupReqListResult>>
 
     @POST("/group/req/accept")
     fun groupReqAccept(
         @Body jsonparms : GroupReqAcceptModel
-    ) : Call<GroupReqAcceptResult>
+    ) : Call<String>
 
     @POST("/group/req/refuse")
     fun groupReqRefuse(
         @Body jsonparms : GroupReqRefuseModel
-    ) : Call<GroupReqRefuseResult>
+    ) : Call<String>
 
     @POST("/group/exit")
     fun groupExit(
         @Body jsonparms : GroupExitModel
-    ) : Call<GroupExitResult>
+    ) : Call<String>
 
     @POST("/group/delete")
     fun groupDelete(
@@ -113,19 +115,24 @@ interface RetroInterface {
     @POST("/group/create")
     fun groupCreate(
         @Body jsonparms : GroupCreateModel
-    ) : Call<GroupCreateResult>
+    ) : Call<String>
 
     @POST("/group/modify")
     fun groupModify(
         @Body jsonparms : GroupModifyModel
-    ) : Call<GroupModifyResult>
+    ) : Call<String>
 
-    @GET("/user")
+    @POST("/user")
     fun user(
-        @Query("uid") uid: Int
+        @Body jsonparms : UserModel
     ): Call<UserResult>
 
-    @GET("/group/joined")
+    @POST("/group/created")
+    fun groupCreated(
+            @Body jsonparms : GroupCreatedModel
+    ) : Call<List<GroupCreatedResult>>
+
+    @POST("/group/joined")
     fun groupJoined(
         @Body jsonparms : GroupJoinedModel
     ) : Call<List<GroupJoinedResult>>
@@ -133,19 +140,19 @@ interface RetroInterface {
     @POST("/user/review/write")
     fun userReviewWrite(
         @Body jsonparms : UserReviewWriteModel
-    ) : Call<UserReviewWriteResult>
+    ) : Call<String>
 
     @POST("/user/modify")
     fun userModify(
         @Body jsonparms : UserModifyModel
-    ) : Call<UserModifyResult>
+    ) : Call<String>
 
     @POST("/friend/req")
     fun friendReq(
         @Body jsonparms : FriendReqModel
-    ) : Call<FriendReqResult>
+    ) : Call<String>
 
-    @GET("/friend/reqList")
+    @POST("/friend/reqList")
     fun friendReqList(
         @Body jsonparms : FriendReqListModel
     ) : Call<List<FriendReqListResult>>
@@ -153,19 +160,19 @@ interface RetroInterface {
     @POST("/friend/req/accept")
     fun friendReqAccept(
         @Body jsonparms : FriendReqAcceptModel
-    ) : Call<FriendReqAcceptResult>
+    ) : Call<String>
 
     @POST("/friend/req/refuse")
     fun friendReqRefuse(
         @Body jsonparms : FriendReqRefuseModel
-    ) : Call<FriendReqRefuseResult>
+    ) : Call<String>
 
     @POST("/group/invite")
     fun groupInvite(
         @Body jsonparms : GroupInviteModel
     ) : Call<GroupInviteResult>
 
-    @GET("/group/inviteList")
+    @POST("/group/inviteList")
     fun groupInviteList(
         @Body jsonparms : GroupInviteListModel
     ) : Call<List<GroupInviteListResult>>
@@ -173,32 +180,32 @@ interface RetroInterface {
     @POST("/group/invite/accept")
     fun groupInviteAccept(
         @Body jsonparms : GroupInviteAcceptModel
-    ) : Call<GroupInviteAcceptResult>
+    ) : Call<String>
 
     @POST("/group/invite/refuse")
     fun groupInviteRefuse(
         @Body jsonparms : GroupInviteRefuseModel
-    ) : Call<GroupInviteRefuseResult>
+    ) : Call<String>
 
-    @GET("/freind/list")
+    @GET("/friend/list")
     fun friendList(
         @Body jsonparms : FriendListModel
-    ) : Call<List<FriendListResult>>
+    ) : Call<FriendListResult>
 
-    @GET("/notification")
+    @POST("/notification")
     fun notification(
         @Body jsonparms : NotificationModel
-    ) : Call<NotificationResult>
+    ) : Call<String>
 
     @POST("/auth/sendEmail")
     fun authSendEmail(
         @Body jsonparms : AuthSendEmailModel
-    ) : Call<AuthSendEmailResult>
+    ) : Call<String>
 
-    @GET("/auth/match")
+    @POST("/auth/match")
     fun authMatch(
         @Body jsonparms : AuthMatchModel
-    ) : Call<AuthMatchResult>
+    ) : Call<String>
 
     @GET("/group/search")
     fun groupSearch(

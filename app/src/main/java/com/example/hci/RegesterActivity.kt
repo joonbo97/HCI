@@ -2,12 +2,18 @@ package com.example.hci
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.hci.data.model.AuthMatchModel
+import com.example.hci.data.model.AuthMatchResult
+import com.example.hci.data.model.AuthSendEmailModel
+import com.example.hci.data.model.AuthSendEmailResult
 import com.example.hci.data.model.Register.RegisterModel
 import com.example.hci.data.model.Register.RegisterResult
 import retrofit2.Call
@@ -17,6 +23,9 @@ import java.util.regex.Pattern
 
 
 class RegesterActivity : AppCompatActivity() {
+    var emailflag = false
+    var senddoneflag = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_regester)
@@ -32,7 +41,7 @@ class RegesterActivity : AppCompatActivity() {
         var pw2 :String = ""
         var name :String
         var email :String
-        var emailcode :String
+        var emailcode :Int
 
         val editID :EditText = findViewById(R.id.editID)
         val editPW :EditText = findViewById(R.id.editPW)
@@ -148,6 +157,58 @@ class RegesterActivity : AppCompatActivity() {
         }
 
 
+
+        val sendbtn :ImageView = findViewById(R.id.inboxsend)
+        sendbtn.setOnClickListener {
+            if(!emailvalidation() && !checkemail())
+            {
+                //버튼 비활성화
+                sendbtn.isEnabled = false
+                sendbtn.setImageResource(R.drawable.inboxok2)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    sendbtn.isEnabled = true
+                    sendbtn.setImageResource(R.drawable.regester_sendbtn)
+                }, 3000)
+
+                email = editEmail.text.toString()
+                SendEmailCode(AuthSendEmailModel(email))
+                senddoneflag = true
+
+
+
+                //Handler(Looper.getMainLooper()).removeCallbacksAndMessages(null)
+            }
+            else
+            {
+                Toast.makeText(this, "이메일 형식을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                senddoneflag = false
+            }
+        }
+
+        val okbtn :ImageView = findViewById(R.id.inboxok)
+        okbtn.setOnClickListener {
+            if(checkemail()) //비었으면
+            {
+                Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+            else if(checkemailcode())
+            {
+                Toast.makeText(this, "이메일인증 코드를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+            else if(!senddoneflag)
+            {
+                Toast.makeText(this, "이메일인증을 진행해주세요.", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                emailcode = editEmailCode.text.toString().toInt()
+                email = editEmail.text.toString()
+                checkEmailCode(AuthMatchModel(emailcode, email))
+            }
+        }
+
+
         val nextBtn: ImageButton = findViewById(R.id.nextbtn)
         nextBtn.setOnClickListener {
             pw = editPW.text.toString()
@@ -155,6 +216,10 @@ class RegesterActivity : AppCompatActivity() {
             if(CheckEditTextIsEmpth()!=0)// 빈칸, 아이디 비밀 번호 이메일 형식 검사
             {
                 //TODO() //각 항목별 문제가 있을 때
+            }
+            else if(!emailflag)
+            {
+                Toast.makeText(this, "이메일 인증을 완료해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
 
@@ -165,22 +230,80 @@ class RegesterActivity : AppCompatActivity() {
                 Register(RegisterModel(id, pw, name, email))
             }
         }
-
     }
+
+    private fun SendEmailCode(authSendEmailModel : AuthSendEmailModel){
+        val api = RetroInterface.create()
+        api.authSendEmail(authSendEmailModel).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>,response: Response<String>) {
+                //response.body() = 인증번호를 보냈습니다.
+                if(response.isSuccessful){
+                    Toast.makeText(this@RegesterActivity, "메일 발송 완료.", Toast.LENGTH_SHORT).show() //인증번호를 보냈습니다.
+                }
+                else
+                {
+                    Toast.makeText(this@RegesterActivity, "메일 발송 실패. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Toast.makeText(this@RegesterActivity, "메일 발송 실패. 인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                Log.d("ErrorMessage : ", t.localizedMessage)
+            }
+        })
+    }
+
+    private fun checkEmailCode(authMatchModel : AuthMatchModel){
+        val api=RetroInterface.create()
+        api.authMatch(authMatchModel).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>,response: Response<String>) {
+                if(response.isSuccessful){
+                    val message :String = response.body().toString()
+
+                    if(message == "인증번호 일치")
+                    {
+                        Toast.makeText(this@RegesterActivity, response.body().toString(), Toast.LENGTH_SHORT).show()
+                        emailflag = true
+                    }
+                    else
+                    {
+                        Toast.makeText(this@RegesterActivity, response.body().toString(), Toast.LENGTH_SHORT).show()
+                        emailflag = false
+                    }
+                }
+                else
+                {
+                    Toast.makeText(this@RegesterActivity, "다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                    emailflag = false
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Toast.makeText(this@RegesterActivity, "연결에 실패했습니다. 인터넷을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                emailflag = false
+            }
+        })
+    }
+
     private fun Register(registerModel : RegisterModel){
         val api=RetroInterface.create()
         api.register(registerModel).enqueue(object : Callback<RegisterResult> {
             override fun onResponse(call: Call<RegisterResult>,response: Response<RegisterResult>) {
-                if(response.isSuccessful()){
+                if(response.isSuccessful){
                     val registerresult = response.body()
                     val uid : Int = registerresult!!.uid
-                    if(uid != -1) {
+                    if((uid != -1 ) && senddoneflag && emailflag)
+                    {
                         Toast.makeText(
                             this@RegesterActivity, "회원가입 성공 지역을 선택해주세요. $uid", Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(this@RegesterActivity, SetlocationActivity::class.java)
                         intent.putExtra("uid", uid)
                         startActivity(intent)
+                    }
+                    else if(!senddoneflag || !emailflag)
+                    {
+                        Toast.makeText(this@RegesterActivity, "이메일 인증이 완료되지 않았습니다.", Toast.LENGTH_SHORT).show()
                     }
                     else
                     {

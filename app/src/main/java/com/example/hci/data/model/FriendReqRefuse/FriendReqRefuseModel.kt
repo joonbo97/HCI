@@ -1,4 +1,4 @@
-package com.example.hci.data.model
+package com.example.hci.data.model.FriendReqRefuse
 
 data class FriendReqRefuseModel(
     var uid : Int,

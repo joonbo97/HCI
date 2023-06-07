@@ -42,6 +42,8 @@ class NotificationsFragment : Fragment() {
 
 
         val starimg :ImageView = root.findViewById(R.id.star)
+
+
         fun setstar(point :Double)//점수 입력하면 별을 세팅하는 함수
         {
             if(point == 5.0)
@@ -88,6 +90,15 @@ class NotificationsFragment : Fragment() {
             editimage.visibility = View.VISIBLE
             chatimage.visibility = View.VISIBLE
             friendimage.visibility = View.VISIBLE
+
+            nameText.text = MainActivity.name
+            locationText.text = MainActivity.city + " " +MainActivity.district
+            emailText.text = MainActivity.email
+
+            val score :TextView = root.findViewById(R.id.myscore_text)
+            score.text = String.format("%.1f", MainActivity.score)
+
+            setstar(MainActivity.score)
         }
 
         friendimage.setOnClickListener {

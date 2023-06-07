@@ -11,15 +11,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.hci.data.model.GroupIdListModel
-import com.example.hci.data.model.GroupIdListResult
-import com.example.hci.data.model.GroupInfoModel
-import com.example.hci.data.model.GroupInfoResult
+import com.example.hci.data.model.*
 
 class SelectCategory : AppCompatActivity() {
     lateinit var groupinfoadapter :GroupInfoAdapter
-    val data = mutableListOf<GroupInfoResult>()
-
+    val data = mutableListOf<GroupInfoResult2>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,14 +45,12 @@ class SelectCategory : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
-        //getGroupInfo()
-
-        //TODO 리사이클러 뷰
         if(MainActivity.flagLogin)//로그인 상태라면
         {
-            initRecycler()
+            initRecycler(categoryIDX)
+
+            groupinfoadapter.notifyDataSetChanged()
+
         }
     }
 
@@ -65,7 +59,17 @@ class SelectCategory : AppCompatActivity() {
         api.groupIdList(groupIdListModel).enqueue(object : Callback<List<GroupIdListResult>> {
             override fun onResponse(call: Call<List<GroupIdListResult>>,response: Response<List<GroupIdListResult>>) {
                 if(response.isSuccessful()){
-                    Log.d("Response:", response.body().toString())
+                    //Log.d("Response:", response.body().toString())
+                    val groupIds = response.body()
+                    groupIds?.let {
+                        for(GroupIdListResult in groupIds)
+                        {
+                            val id = GroupIdListResult.id
+
+                            //TODO 해당 ID값으로 그륩정보 받아오기
+                            getGroupInfo(GroupInfoModel(id))
+                        }
+                    }
                 }
                 else
                 {
@@ -81,55 +85,36 @@ class SelectCategory : AppCompatActivity() {
 
     private fun getGroupInfo(groupInfoModel: GroupInfoModel){
         val api = RetroInterface.create()
-        api.groupInfo(groupInfoModel).enqueue(object : Callback<List<GroupInfoResult>> {
-            override fun onResponse(call: Call<List<GroupInfoResult>>, response: Response<List<GroupInfoResult>>) {
+        api.groupInfo(groupInfoModel).enqueue(object : Callback<GroupInfoResult> {
+            override fun onResponse(call: Call<GroupInfoResult>, response: Response<GroupInfoResult>) {
                 if (response.isSuccessful) {
                     val groupInfoList = response.body()
-                    groupinfoadapter.data.clear()
+
                     if (groupInfoList != null) {
-                        groupinfoadapter.data.addAll(groupInfoList)
+                        groupinfoadapter.data.add(GroupInfoResult2(groupInfoList.name, groupInfoList.score, groupInfoList.creator, groupInfoList.headcount, groupInfoList.capacity,
+                                groupInfoList.description, groupInfoList.date, groupInfoList.start_time,groupInfoList.end_time, groupInfoList.area, groupInfoModel.group_id))
+                        groupinfoadapter.notifyDataSetChanged()
                     }
-                    groupinfoadapter.notifyDataSetChanged()
                     Log.d("Response:", response.body().toString())
                 } else {
                     Log.d("Response FAILURE", response.body().toString())
                 }
             }
 
-            override fun onFailure(call: Call<List<GroupInfoResult>>, t: Throwable) {
+            override fun onFailure(call: Call<GroupInfoResult>, t: Throwable) {
                 Log.d("CONNECTION FAILURE :", t.localizedMessage)
             }
         })
     }
 
-    private fun initRecycler() {
+    private fun initRecycler(categoryIDX :Int) {
         val recyclerView: RecyclerView = findViewById(R.id.SelectCategory_RecyclerView)
 
         groupinfoadapter = GroupInfoAdapter(this)
         recyclerView.adapter = groupinfoadapter
 
-        data.apply {
-            add(GroupInfoResult("1번 모임", 4.4, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("2번 모임", 3.4, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("3번 모임", 2.6, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("4번 모임", 1.4, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("5번 모임", 5.0, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("6번 모임", 4.6, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("7번 모임", 3.6, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("8번 모임", 2.2, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("9번 모임", 1.6, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-            add(GroupInfoResult("10번 모임", 5.0, "관리자", 3, 4, "설명", "2020-11-23",
-                "2020-11-23 10:00:00", "2020-11-23 20:00:00", "광진구"))
-        }
+        getGroupidList(GroupIdListModel(categoryIDX+1, MainActivity.location_id))
+
 
         groupinfoadapter.data.addAll(data)
         groupinfoadapter.notifyDataSetChanged()//변경감지

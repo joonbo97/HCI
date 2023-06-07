@@ -2,18 +2,23 @@ package com.example.hci
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.navigation.fragment.findNavController
 import com.example.hci.data.model.Setlocation.SetlocationModel
+import com.example.hci.data.model.UserModel
+import com.example.hci.data.model.UserResult
+import com.example.hci.ui.home.HomeFragment
+import com.example.hci.ui.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+
 
 class SetlocationActivity : AppCompatActivity() {
 
@@ -79,7 +84,6 @@ class SetlocationActivity : AppCompatActivity() {
         //스피너, 뒤로가기 버튼 세팅완료
 
 
-        //Login에 따른 Activity변경
         if (MainActivity.flagLogin) //로그인 되어있으면 수정모드
         {
             val title :TextView = findViewById(R.id.setlocation_text)
@@ -89,18 +93,11 @@ class SetlocationActivity : AppCompatActivity() {
             btn.setImageResource(R.drawable.editlocation_done)
 
             btn.setOnClickListener{
-                //TODO 수정완료 눌렀을때 변경된 지역 정보를 서버로 전달하여 저장해야함.
-                //TODO intent 로 spinner값 받아서 앞으로 보내야 함 (스피너 값 변경 가능할 수도 있어서 냅둿음)
-
                 val city: String = spinnerCity.selectedItem.toString()
                 val district: String = spinnerCity2.selectedItem.toString()
 
-                MainActivity.city = city
-                MainActivity.district = district
+                SetLocation(SetlocationModel(city, district, MainActivity.uid))
 
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
                 finish()
             }
         }
@@ -111,16 +108,36 @@ class SetlocationActivity : AppCompatActivity() {
                 val city: String = spinnerCity.selectedItem.toString()
                 val district: String = spinnerCity2.selectedItem.toString()
                 val uid = intent.getIntExtra("uid", -1)
-                Toast.makeText(this, "UDI : $uid", Toast.LENGTH_SHORT).show()
                 if (uid == -1) {
-                    //TODO
+                    Toast.makeText(this, "회원가입에 실패했습니다. 처음부터 시도해주세요.", Toast.LENGTH_SHORT).show()
                 } else {
                     SetLocation(SetlocationModel(city, district, uid))
                 }
             }
-
-
         }
+    }
+
+    private fun getUserInfo(userModel: UserModel){
+        val api=RetroInterface.create()
+        api.user(userModel).enqueue(object : Callback<UserResult> {
+            override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
+                if(response.isSuccessful){
+                    val userresult = response.body()
+
+                    MainActivity.name =userresult!!.name
+                    MainActivity.location_id = userresult.location_id
+                    MainActivity.email = userresult.email
+                    MainActivity.score = userresult.score
+                    MainActivity.city = MainActivity().LocationIDSearch(MainActivity.location_id)[0].toString()
+                    MainActivity.district = MainActivity().LocationIDSearch(MainActivity.location_id)[1].toString()
+                }
+            }
+
+            override fun onFailure(call: Call<UserResult>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+
+            }
+        })
     }
 
     private fun SetLocation(setlocationModel :SetlocationModel)
@@ -128,13 +145,18 @@ class SetlocationActivity : AppCompatActivity() {
         val api = RetroInterface.create()
         api.setlocation(setlocationModel).enqueue(object : Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                if(response.isSuccessful())
+                if(response.isSuccessful)
                 {
-                    Log.d("Response: ", response.body().toString())
-                    Toast.makeText(this@SetlocationActivity, "지역설정 완료.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SetlocationActivity, "${setlocationModel.city} ${setlocationModel.district}로 지역설정 완료하였습니다.", Toast.LENGTH_SHORT).show()
 
-                    val intent = Intent(this@SetlocationActivity, MainActivity::class.java)
-                    startActivity(intent)
+                    if(!MainActivity.flagLogin) {
+                        val intent = Intent(this@SetlocationActivity, MainActivity::class.java)
+                        intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                    else
+                        getUserInfo(UserModel(MainActivity.uid))
                 }
                 else
                 {
@@ -145,7 +167,6 @@ class SetlocationActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Toast.makeText(this@SetlocationActivity, "연결 실패. 인터넷 연결을 확인하세요.", Toast.LENGTH_SHORT).show()
-                Log.d("CONNECTION FAILURE :", t.localizedMessage)
             }
 
         })

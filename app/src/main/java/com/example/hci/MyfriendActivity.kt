@@ -13,5 +13,14 @@ class MyfriendActivity : AppCompatActivity() {
         image1.setOnClickListener {
             finish()
         }
+
+        val addfriendbtn :ImageView = findViewById(R.id.addfriend_img)
+
+        //친구추가 버튼 클릭
+        addfriendbtn.setOnClickListener {
+            val dialog = AddFriendDialog(this)
+            dialog.showDialog()
+        }
+
     }
 }
