@@ -13,17 +13,22 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.hci.data.model.ProfileImg.ProfileImgModel
+import com.example.hci.data.model.ProfileImg.ProfileImgResult
 import com.example.hci.data.model.UserModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.hci.data.model.UserModifyModel
 import com.example.hci.data.model.UserResult
+import de.hdodenhof.circleimageview.CircleImageView
+import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
 
 class EditprofileActivity : AppCompatActivity() {
-    lateinit var profileImageView :ImageView
+    lateinit var profileImageView :CircleImageView
+    var imgStr : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +98,7 @@ class EditprofileActivity : AppCompatActivity() {
         val camera :ImageView = findViewById(R.id.myphoto_image2)
         camera.setOnClickListener {
             //TODO : 카메라버튼(프사변경)수행
-            profileImageView = findViewById(R.id.myphoto_image)
+            profileImageView = findViewById(R.id.civ_profile)
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, 1)
         }
@@ -115,6 +120,13 @@ class EditprofileActivity : AppCompatActivity() {
 
             if (imageBitmap != null) {
                 profileImageView.setImageBitmap(imageBitmap)
+                try {
+                    var bm = resize(imageBitmap)
+                    var imageStr = bitmapToByteArray(bm)
+                    postImgToDB(ProfileImgModel(MainActivity.uid, imageStr))
+                }catch (e:java.lang.Exception){
+                    e.printStackTrace()
+                }
             }
         }
     }
@@ -160,6 +172,8 @@ class EditprofileActivity : AppCompatActivity() {
 
                     MainActivity.city = MainActivity().LocationIDSearch(MainActivity.location_id)[0].toString()
                     MainActivity.district = MainActivity().LocationIDSearch(MainActivity.location_id)[1].toString()
+
+
                 }
                 else
                 {
@@ -173,4 +187,106 @@ class EditprofileActivity : AppCompatActivity() {
             }
         })
     }
+
+
+    private fun postImgToDB(profileImgModel: ProfileImgModel){
+        val api=RetroInterface.create()
+        api.profileImgPost(profileImgModel).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>,response: Response<String>) {
+                if(response.isSuccessful()){
+                    if(response.body() == "success") {
+                        Toast.makeText(this@EditprofileActivity, "프로필 사진 수정을 완료했습니다.", Toast.LENGTH_SHORT).show()
+                        //getUserInfo(UserModel(MainActivity.uid))
+                        finish()
+                    }
+                    else
+                        Toast.makeText(this@EditprofileActivity, "프로필 사진 수정에 실패했습니다. 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    Log.d("Response FAILURE", response.body().toString())
+                    Toast.makeText(this@EditprofileActivity, "프로필 사진 수정에 실패했습니다. 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+                Toast.makeText(this@EditprofileActivity, "프로필 사진 수정에 실패했습니다. 인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+// 비트맵이미지를 blob으로 바꿔줌
+    private fun bitmapToByteArray(bitmap:Bitmap):String{
+        var image = ""
+        var stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream)
+        var byteArray = stream.toByteArray()
+        image = "&image="+byteArrayToBinaryString(byteArray)
+        return image
+    }
+
+    private fun byteArrayToBinaryString(b: ByteArray):String{
+        var sb = java.lang.StringBuilder()
+        for(i in 0..b.size){
+            sb.append(byteToBinaryString(b[i]))
+        }
+        return sb.toString()
+    }
+
+    private fun byteToBinaryString(n:Byte):String{
+        var sb = java.lang.StringBuilder("00000000")
+        for(bit in 0..7){
+            if(((n.toInt() shr bit) and 1)>0){
+                sb.setCharAt(7-bit,'1')
+            }
+        }
+        return sb.toString()
+    }
+
+    private fun resize(bm : Bitmap):Bitmap{
+        var bm2 = bm
+        var config = resources.configuration
+        if(config.smallestScreenWidthDp>=800)
+            bm2 = Bitmap.createScaledBitmap(bm2,400,240,true)
+        else if(config.smallestScreenWidthDp>=600)
+            bm2 = Bitmap.createScaledBitmap(bm2,300,180,true)
+        else if(config.smallestScreenWidthDp>=400)
+            bm2 = Bitmap.createScaledBitmap(bm2,200,120,true)
+        else if(config.smallestScreenWidthDp>=360)
+            bm2 = Bitmap.createScaledBitmap(bm2,180,108,true)
+        else
+            bm2 = Bitmap.createScaledBitmap(bm2,160,96,true)
+        return bm2
+    }
+
+
+//    private fun StringToBitmap(imgStr:String):Bitmap{
+//
+//        return null
+//    }
+//
+//    private fun getImgFromDB(userModel: UserModel):String{
+//        val api=RetroInterface.create()
+//        api.profileImgGet(userModel).enqueue(object : Callback<ProfileImgResult> {
+//            override fun onResponse(call: Call<ProfileImgResult>,response: Response<ProfileImgResult>) {
+//                if(response.isSuccessful){
+//                    val result = response.body()
+//
+//                    var imgBlob = result!!.image
+//                    imgStr = imgBlob
+//                }
+//                else
+//                {
+//
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<ProfileImgResult>, t: Throwable) {
+//                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+//
+//            }
+//        })
+//    }
+
 }

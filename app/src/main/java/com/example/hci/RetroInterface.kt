@@ -3,6 +3,8 @@ package com.example.hci
 import com.example.hci.data.model.*
 import com.example.hci.data.model.FriendReq.FriendReqResult
 import com.example.hci.data.model.FriendReqRefuse.FriendReqRefuseModel
+import com.example.hci.data.model.ProfileImg.ProfileImgModel
+import com.example.hci.data.model.ProfileImg.ProfileImgResult
 import com.example.hci.data.model.Register.RegisterModel
 import com.example.hci.data.model.Register.RegisterResult
 import com.example.hci.data.model.Setlocation.SetlocationModel
@@ -226,4 +228,14 @@ interface RetroInterface {
     fun chatGet(
         @Body jsonparms : ChatGetModel
     ) : Call<List<ChatGetResult>>
+
+    @GET("/user/img/get")
+    fun profileImgGet(
+        @Body jsonparms : UserModel
+    ):Call<ProfileImgResult>
+
+    @POST("/user/img/post")
+    fun profileImgPost(
+        @Body jsonparms: ProfileImgModel
+    ):Call<String>
 }
