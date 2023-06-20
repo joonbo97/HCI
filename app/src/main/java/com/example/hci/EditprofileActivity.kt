@@ -1,5 +1,6 @@
 package com.example.hci
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -10,6 +11,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.example.hci.data.model.UserModel
 import retrofit2.Call
@@ -36,6 +38,19 @@ class EditprofileActivity : AppCompatActivity() {
        // val locationText :EditText = findViewById(R.id.mylocation_text)
         val emailText :EditText = findViewById(R.id.myemail_text)
 
+
+        val locationText :TextView = findViewById(R.id.mylocation_text)
+        locationText.text = MainActivity.city + " " + MainActivity.district
+        locationText.setOnClickListener {
+            Toast.makeText(this, "지역설정 창으로 이동합니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SetlocationActivity::class.java)
+
+            intent.putExtra("city", MainActivity.city)
+            intent.putExtra("district", MainActivity.district)
+
+
+            startActivity(intent)
+        }
 
 
         if (MainActivity.name.isEmpty()) {
@@ -86,7 +101,7 @@ class EditprofileActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1 && resultCode == RESULT_OK) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {//카메라
             val selectedImage: Uri? = data?.data
             val imageBitmap: Bitmap? = selectedImage?.let { uri ->
                 try {

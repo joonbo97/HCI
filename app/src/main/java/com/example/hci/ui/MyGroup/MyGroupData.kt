@@ -8,5 +8,8 @@ data class MyGroupData(
         var group_capacity :Int,
         var group_headcount :Int,
         var group_start :String,
-        var group_end :String
+        var group_end :String,
+        var group_discription :String,
+        var score :Double,
+        var creator :String
 )

@@ -53,4 +53,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/myprofile_friend" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Myfriend_RecyclerView"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:layout_width="385dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="115dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

@@ -110,7 +110,7 @@ interface RetroInterface {
     @POST("/group/delete")
     fun groupDelete(
         @Body jsonparms : GroupDeleteModel
-    ) : Call<GroupDeleteResult>
+    ) : Call<String>
 
     @POST("/group/create")
     fun groupCreate(
@@ -187,10 +187,10 @@ interface RetroInterface {
         @Body jsonparms : GroupInviteRefuseModel
     ) : Call<String>
 
-    @GET("/friend/list")
+    @POST("/friend/list")
     fun friendList(
         @Body jsonparms : FriendListModel
-    ) : Call<FriendListResult>
+    ) : Call<List<FriendListResult>>
 
     @POST("/notification")
     fun notification(

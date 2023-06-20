@@ -1,16 +1,24 @@
 package com.example.hci.ui.MyGroup
 
 import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.hci.Alarm.AlarmFrandAdapter
-import com.example.hci.R
+import android.widget.Toast
+import com.example.hci.*
+import com.example.hci.data.model.GroupDeleteModel
+import com.example.hci.data.model.GroupInfoResult2
 import java.text.SimpleDateFormat
 import java.util.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class Mygroup2Adapter(private val context : Context) : RecyclerView.Adapter<Mygroup2Adapter.ViewHolder>() {
@@ -57,18 +65,79 @@ class Mygroup2Adapter(private val context : Context) : RecyclerView.Adapter<Mygr
 
 
             upbtn.setOnClickListener {
+                val intent = Intent(context, EditgroupActivity::class.java)
 
+
+                intent.putExtra("group_id", item.group_id.toString())
+                intent.putExtra("group_name", group_name.text.toString())
+                intent.putExtra("group_location", group_location.text.toString())
+                intent.putExtra("group_discription", item.group_discription)
+
+                val date = group_date.text.toString()
+                val inputDateFormat2 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val parsedDate2 = inputDateFormat2.parse(date)
+                val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(parsedDate2)
+                val month = SimpleDateFormat("MM", Locale.getDefault()).format(parsedDate2)
+                val day = SimpleDateFormat("dd", Locale.getDefault()).format(parsedDate2)
+
+                val yearString: String = year
+                val monthString: String = month
+                val dayString: String = day
+
+                intent.putExtra("group_date_year", yearString)
+                intent.putExtra("group_date_month", monthString)
+                intent.putExtra("group_date_day", dayString)
+                intent.putExtra("group_date_day", dayString)
+
+                val timeRangeString = group_time.text.toString()
+                val timePattern = "(\\d{2})시\\s(\\d{2})분".toRegex()
+
+                val matches = timePattern.findAll(timeRangeString).toList()
+                if (matches.size == 2) {
+                    val match1 = matches[0]
+                    val match2 = matches[1]
+
+                    val hour1 = match1.groupValues[1]
+                    val minute1 = match1.groupValues[2]
+
+                    val hour2 = match2.groupValues[1]
+                    val minute2 = match2.groupValues[2]
+
+                    intent.putExtra("group_start_hour", hour1)
+                    intent.putExtra("group_start_min", minute1)
+                    intent.putExtra("group_end_hour", hour2)
+                    intent.putExtra("group_end_min", minute2)
+                }
+
+
+                intent.putExtra("group_capacity", item.group_capacity.toString())
+
+                context.startActivity(intent)
             }
 
             downbtn.setOnClickListener {
-
+                deleteGroup(GroupDeleteModel(item.group_id, MainActivity.uid))
+                val position = adapterPosition
+                if(position != RecyclerView.NO_POSITION)
+                    removeData(position)
             }
 
+            itemView.setOnClickListener {
+                val dialog = GroupInfoDialog(context, GroupInfoResult2(
+                    item.group_name,
+                    item.score,
+                    item.creator,
+                    item.group_headcount,
+                    item.group_capacity,
+                    item.group_discription,
+                    item.group_date,
+                    item.group_start,
+                    item.group_end,
+                    item.group_location,
+                    item.group_id), false)
+                dialog.showDialog()
+            }
 
-            //삭제
-            /*val position = adapterPosition
-            if(position != RecyclerView.NO_POSITION)
-                removeData(position)*/
 
         }
     }
@@ -90,5 +159,37 @@ class Mygroup2Adapter(private val context : Context) : RecyclerView.Adapter<Mygr
     {
         data.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+
+
+
+
+
+
+
+    private fun deleteGroup(groupDeleteModel : GroupDeleteModel){
+        val api= RetroInterface.create()
+        api.groupDelete(groupDeleteModel).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>,response: Response<String>) {
+                if(response.isSuccessful()){
+                    Log.d("Response:", response.body().toString())
+
+                    if(response.body().toString() == "d")
+                        Toast.makeText(context, "모임해체를 완료했습니다.", Toast.LENGTH_SHORT).show()
+                    else
+                        Toast.makeText(context, "모임해체를 실패했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    Log.d("Response FAILURE", response.body().toString())
+                    Toast.makeText(context, "모임해체를 실패했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Toast.makeText(context, "요청을 실패했습니다. 인터넷 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

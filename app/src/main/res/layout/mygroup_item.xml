@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="380dp"
-    android:layout_height="143dp"
+    android:layout_height="120dp"
     android:background="@drawable/trst">
 
     <TextView
         android:id="@+id/group_people"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginEnd="327dp"
+        android:layout_marginBottom="22dp"
         android:text="1/3"
         android:textColor="@color/white"
         android:textSize="7sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/people_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/people_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="22dp"
         android:text="정원"
         android:textColor="@color/white"
         android:textSize="7sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/group_people"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/downbotton"
@@ -42,7 +37,7 @@
         android:layout_height="31dp"
         android:layout_marginStart="265dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="41dp"
+        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +62,7 @@
         android:layout_height="55dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="23dp"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="42dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -78,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
-        android:layout_marginBottom="58dp"
+        android:layout_marginBottom="35dp"
         android:text="모임 시간"
         android:textColor="@color/white"
         android:textSize="10sp"

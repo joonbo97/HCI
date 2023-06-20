@@ -9,18 +9,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.hci.GroupInfoDialog
 import com.example.hci.MainActivity
 import com.example.hci.R
 import com.example.hci.RetroInterface
 import com.example.hci.data.model.GroupExitModel
+import com.example.hci.data.model.GroupInfoResult2
 import java.text.SimpleDateFormat
 import java.util.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Mygroup1Adapter(private val context : Context) : RecyclerView.Adapter<Mygroup1Adapter.ViewHolder>() {
+class Mygroup1Adapter(private val context : Context) : RecyclerView.Adapter<Mygroup1Adapter.ViewHolder>(), MyGroupDialog.MyGroupDialogListener{
     var data = mutableListOf<MyGroupData>()
+    var AP :Int = 0
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val group_name : TextView = itemView.findViewById(R.id.group_name)
@@ -63,13 +66,11 @@ class Mygroup1Adapter(private val context : Context) : RecyclerView.Adapter<Mygr
 
             upbtn.setOnClickListener {
                 Toast.makeText(context, "모임에 평가를 진행해주세요", Toast.LENGTH_SHORT).show()
+                AP = adapterPosition
 
                 val dialog = MyGroupDialog(context, item)
+                dialog.setDialogListener(this@Mygroup1Adapter)
                 dialog.showDialog()
-
-                val position = adapterPosition
-                if(position != RecyclerView.NO_POSITION)
-                    removeData(position)
             }
 
             downbtn.setOnClickListener {
@@ -80,6 +81,22 @@ class Mygroup1Adapter(private val context : Context) : RecyclerView.Adapter<Mygr
                 val position = adapterPosition
                 if(position != RecyclerView.NO_POSITION)
                     removeData(position)
+            }
+
+            itemView.setOnClickListener {
+                val dialog = GroupInfoDialog(context, GroupInfoResult2(
+                    item.group_name,
+                    item.score,
+                    item.creator,
+                    item.group_headcount,
+                    item.group_capacity,
+                    item.group_discription,
+                    item.group_date,
+                    item.group_start,
+                    item.group_end,
+                    item.group_location,
+                    item.group_id), false)
+                dialog.showDialog()
             }
         }
     }
@@ -129,5 +146,12 @@ class Mygroup1Adapter(private val context : Context) : RecyclerView.Adapter<Mygr
     {
         data.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    override fun onDialogOkClicked() {
+        val position = AP
+        if (position != RecyclerView.NO_POSITION) {
+            removeData(position)
+        }
     }
 }

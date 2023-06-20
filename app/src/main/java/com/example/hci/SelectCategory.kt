@@ -11,6 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.hci.data.model.*
 
 class SelectCategory : AppCompatActivity() {
@@ -59,14 +60,12 @@ class SelectCategory : AppCompatActivity() {
         api.groupIdList(groupIdListModel).enqueue(object : Callback<List<GroupIdListResult>> {
             override fun onResponse(call: Call<List<GroupIdListResult>>,response: Response<List<GroupIdListResult>>) {
                 if(response.isSuccessful()){
-                    //Log.d("Response:", response.body().toString())
                     val groupIds = response.body()
                     groupIds?.let {
                         for(GroupIdListResult in groupIds)
                         {
                             val id = GroupIdListResult.id
 
-                            //TODO 해당 ID값으로 그륩정보 받아오기
                             getGroupInfo(GroupInfoModel(id))
                         }
                     }
@@ -91,9 +90,17 @@ class SelectCategory : AppCompatActivity() {
                     val groupInfoList = response.body()
 
                     if (groupInfoList != null) {
-                        groupinfoadapter.data.add(GroupInfoResult2(groupInfoList.name, groupInfoList.score, groupInfoList.creator, groupInfoList.headcount, groupInfoList.capacity,
-                                groupInfoList.description, groupInfoList.date, groupInfoList.start_time,groupInfoList.end_time, groupInfoList.area, groupInfoModel.group_id))
-                        groupinfoadapter.notifyDataSetChanged()
+                        var master_name :String = ""
+
+                        getUserInfo(UserModel(groupInfoList.creator.toInt())) { userName ->
+                            if (userName != null)
+                                master_name = userName.toString()
+
+
+                            groupinfoadapter.data.add(GroupInfoResult2(groupInfoList.name, groupInfoList.score, master_name, groupInfoList.headcount, groupInfoList.capacity,
+                                    groupInfoList.description, groupInfoList.date, groupInfoList.start_time, groupInfoList.end_time, groupInfoList.area, groupInfoModel.group_id))
+                            groupinfoadapter.notifyDataSetChanged()
+                        }
                     }
                     Log.d("Response:", response.body().toString())
                 } else {
@@ -103,6 +110,26 @@ class SelectCategory : AppCompatActivity() {
 
             override fun onFailure(call: Call<GroupInfoResult>, t: Throwable) {
                 Log.d("CONNECTION FAILURE :", t.localizedMessage)
+            }
+        })
+    }
+
+    private fun getUserInfo(userModel: UserModel, callback: (String?) -> Unit){
+        val api=RetroInterface.create()
+        api.user(userModel).enqueue(object : Callback<UserResult> {
+            override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
+                if(response.isSuccessful){
+                    val userresult = response.body()
+                    val userName = userresult?.name
+                    callback(userName)
+                }
+                else
+                    callback(null)
+            }
+
+            override fun onFailure(call: Call<UserResult>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+                callback(null)
             }
         })
     }

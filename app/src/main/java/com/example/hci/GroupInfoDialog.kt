@@ -3,6 +3,7 @@ package com.example.hci
 import android.app.Dialog
 import android.content.Context
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,13 +16,15 @@ import com.example.hci.data.model.GroupSendRequestModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class GroupInfoDialog (context : Context, private val item : GroupInfoResult2)  {
+class GroupInfoDialog (context : Context, private val item : GroupInfoResult2, private val isImageEnable :Boolean)  {
     private val dialog = Dialog(context, R.style.CustomDialog)
     private var context :Context = context
     var bookmarkflag :Boolean = false
 
     fun showDialog()
     {
+
+
         dialog.setContentView(R.layout.group_info_layout)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.setCanceledOnTouchOutside(true)
@@ -40,6 +43,13 @@ class GroupInfoDialog (context : Context, private val item : GroupInfoResult2)  
         val bookmark :ImageView = dialog.findViewById(R.id.bookmark)
         val joinbtn :ImageView = dialog.findViewById(R.id.joinbtn)
         val star :ImageView = dialog.findViewById(R.id.star)
+
+
+        if(!isImageEnable)
+        {
+            joinbtn.visibility = View.GONE
+        }
+
 
         bookmark.setOnClickListener {
             if(bookmarkflag) {
@@ -109,6 +119,10 @@ class GroupInfoDialog (context : Context, private val item : GroupInfoResult2)  
                     {
                         Toast.makeText(context, "참가 요청을 보냈습니다.", Toast.LENGTH_SHORT).show()
                         dialog.cancel()
+                    }
+                    else if(response.body() == "fail")
+                    {
+                        Toast.makeText(context, "본인의 모임에는 참가신청을 할 수 없습니다.", Toast.LENGTH_SHORT).show()
                     }
                     else
                     {

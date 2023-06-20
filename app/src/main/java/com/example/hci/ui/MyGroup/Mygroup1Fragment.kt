@@ -81,8 +81,30 @@ class Mygroup1Fragment : Fragment() {
                     val groupInfoList = response.body()
 
                     if (groupInfoList != null) {
-                        mygroup1adapter.data.add(MyGroupData(groupInfoModel.group_id, groupInfoList.name, groupInfoList.area, groupInfoList.date, groupInfoList.capacity, groupInfoList.headcount, groupInfoList.start_time, groupInfoList.end_time))
-                        mygroup1adapter.notifyDataSetChanged()
+                        var master_name: String = ""
+
+                        getUserInfo(UserModel(groupInfoList.creator.toInt())) { userName ->
+                            if (userName != null)
+                                master_name = userName.toString()
+
+
+                            mygroup1adapter.data.add(
+                                MyGroupData(
+                                    groupInfoModel.group_id,
+                                    groupInfoList.name,
+                                    groupInfoList.area,
+                                    groupInfoList.date,
+                                    groupInfoList.capacity,
+                                    groupInfoList.headcount,
+                                    groupInfoList.start_time,
+                                    groupInfoList.end_time,
+                                    groupInfoList.description,
+                                    groupInfoList.score,
+                                    master_name
+                                )
+                            )
+                            mygroup1adapter.notifyDataSetChanged()
+                        }
                     }
                     Log.d("Response:", response.body().toString())
                 } else {
@@ -92,6 +114,26 @@ class Mygroup1Fragment : Fragment() {
 
             override fun onFailure(call: Call<GroupInfoResult>, t: Throwable) {
                 Log.d("CONNECTION FAILURE :", t.localizedMessage)
+            }
+        })
+    }
+
+    private fun getUserInfo(userModel: UserModel, callback: (String?) -> Unit){
+        val api=RetroInterface.create()
+        api.user(userModel).enqueue(object : Callback<UserResult> {
+            override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
+                if(response.isSuccessful){
+                    val userresult = response.body()
+                    val userName = userresult?.name
+                    callback(userName)
+                }
+                else
+                    callback(null)
+            }
+
+            override fun onFailure(call: Call<UserResult>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+                callback(null)
             }
         })
     }

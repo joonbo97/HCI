@@ -7,13 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.hci.MainActivity
 import com.example.hci.R
 import com.example.hci.RetroInterface
-import com.example.hci.data.model.GroupCreatedModel
-import com.example.hci.data.model.GroupCreatedResult
-import com.example.hci.data.model.GroupInfoModel
-import com.example.hci.data.model.GroupInfoResult
+import com.example.hci.data.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -83,8 +81,30 @@ class Mygroup2Fragment : Fragment() {
                     val groupInfoList = response.body()
 
                     if (groupInfoList != null) {
-                        mygroup2adapter.data.add(MyGroupData(groupInfoModel.group_id, groupInfoList.name, groupInfoList.area, groupInfoList.date, groupInfoList.capacity, groupInfoList.headcount, groupInfoList.start_time, groupInfoList.end_time))
-                        mygroup2adapter.notifyDataSetChanged()
+                        var master_name: String = ""
+
+                        getUserInfo(UserModel(groupInfoList.creator.toInt())) { userName ->
+                            if (userName != null)
+                                master_name = userName.toString()
+
+
+                            mygroup2adapter.data.add(
+                                MyGroupData(
+                                    groupInfoModel.group_id,
+                                    groupInfoList.name,
+                                    groupInfoList.area,
+                                    groupInfoList.date,
+                                    groupInfoList.capacity,
+                                    groupInfoList.headcount,
+                                    groupInfoList.start_time,
+                                    groupInfoList.end_time,
+                                    groupInfoList.description,
+                                    groupInfoList.score,
+                                    master_name
+                                )
+                            )
+                            mygroup2adapter.notifyDataSetChanged()
+                        }
                     }
                     Log.d("Response:", response.body().toString())
                 } else {
@@ -94,6 +114,26 @@ class Mygroup2Fragment : Fragment() {
 
             override fun onFailure(call: Call<GroupInfoResult>, t: Throwable) {
                 Log.d("CONNECTION FAILURE :", t.localizedMessage)
+            }
+        })
+    }
+
+    private fun getUserInfo(userModel: UserModel, callback: (String?) -> Unit){
+        val api=RetroInterface.create()
+        api.user(userModel).enqueue(object : Callback<UserResult> {
+            override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
+                if(response.isSuccessful){
+                    val userresult = response.body()
+                    val userName = userresult?.name
+                    callback(userName)
+                }
+                else
+                    callback(null)
+            }
+
+            override fun onFailure(call: Call<UserResult>, t: Throwable) {
+                Log.d("CONNECTION FAILURE :", t.localizedMessage)
+                callback(null)
             }
         })
     }

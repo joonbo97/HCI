@@ -28,7 +28,7 @@ class GroupInfoAdapter (private val context : Context) : RecyclerView.Adapter<Gr
         {
             name.text = item.name
             location.text = item.area
-            //date.text = item.date
+
 
             //Date 설정
             val inputDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
@@ -55,7 +55,7 @@ class GroupInfoAdapter (private val context : Context) : RecyclerView.Adapter<Gr
 
             itemView.setOnClickListener {
                 //Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show() //홈트레이닝, 테니스 출력
-                val dialog = GroupInfoDialog(context, item)
+                val dialog = GroupInfoDialog(context, item, true)
                 dialog.showDialog()
             }
 

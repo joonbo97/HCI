@@ -19,6 +19,17 @@ class MyGroupDialog(context : Context, private var item :MyGroupData) {
     private val dialog = Dialog(context, R.style.CustomDialog)
     private var context :Context = context
 
+    interface MyGroupDialogListener {
+        fun onDialogOkClicked()
+    }
+
+    private var dialogListener: MyGroupDialogListener? = null
+
+    fun setDialogListener(listener: MyGroupDialogListener) {
+        dialogListener = listener
+    }
+
+
     fun showDialog()
     {
         dialog.setContentView(R.layout.groupstardialog)
@@ -33,33 +44,35 @@ class MyGroupDialog(context : Context, private var item :MyGroupData) {
 
         title.text = item.group_name + " 평가 하기"
         val star :ImageView = dialog.findViewById(R.id.imageView25)
+        star.setImageResource(R.drawable.star5)
         var cnt = 1
 
         star.setOnClickListener {
-            if(cnt % 5 == 1) {
-                star.setImageResource(R.drawable.star1)
-                cnt = 2
-            }
-            else if(cnt % 5 == 2) {
-                star.setImageResource(R.drawable.star2)
-                cnt = 3
-            }
-            else if(cnt % 5 == 3) {
-                star.setImageResource(R.drawable.star3)
-                cnt = 4
-            }
-            else if(cnt % 5 == 4) {
-                star.setImageResource(R.drawable.star4)
-                cnt= 5
-            }
-            else if(cnt % 5 == 0) {
-                star.setImageResource(R.drawable.star5)
-                cnt = 1
+            when {
+                cnt % 5 == 1 -> {
+                    star.setImageResource(R.drawable.star1)
+                    cnt = 2
+                }
+                cnt % 5 == 2 -> {
+                    star.setImageResource(R.drawable.star2)
+                    cnt = 3
+                }
+                cnt % 5 == 3 -> {
+                    star.setImageResource(R.drawable.star3)
+                    cnt = 4
+                }
+                cnt % 5 == 4 -> {
+                    star.setImageResource(R.drawable.star4)
+                    cnt= 5
+                }
+                cnt % 5 == 0 -> {
+                    star.setImageResource(R.drawable.star5)
+                    cnt = 1
+                }
             }
         }
 
         okbtn.setOnClickListener {
-            cnt++
             if(cnt == 1)
                 cnt = 5
             reviewGroup(UserReviewWriteModel(MainActivity.uid, cnt, item.group_id))
@@ -74,6 +87,8 @@ class MyGroupDialog(context : Context, private var item :MyGroupData) {
     }
 
     private fun reviewGroup(userReviewWriteModel : UserReviewWriteModel){
+        dialogListener?.onDialogOkClicked()
+
         val api= RetroInterface.create()
         api.userReviewWrite(userReviewWriteModel).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>,response: Response<String>) {

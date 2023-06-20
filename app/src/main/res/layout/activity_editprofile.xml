@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/trst"
-    tools:context=".ui.MyProfile.EditprofileActivity">
+    android:background="@drawable/trst">
 
 
     <ImageView
@@ -99,15 +98,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myemail_text" />
 
-    <EditText
+    <TextView
         android:id="@+id/mylocation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:clickable="false"
-        android:hint="서울시 은평구"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/white"
+        android:text="서울시 은평구"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
