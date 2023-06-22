@@ -40,7 +40,6 @@ class EditprofileActivity : AppCompatActivity() {
         }
 
         val nameText :EditText = findViewById(R.id.myname_text)
-       // val locationText :EditText = findViewById(R.id.mylocation_text)
         val emailText :EditText = findViewById(R.id.myemail_text)
 
 
@@ -261,32 +260,5 @@ class EditprofileActivity : AppCompatActivity() {
     }
 
 
-//    private fun StringToBitmap(imgStr:String):Bitmap{
-//
-//        return null
-//    }
-//
-//    private fun getImgFromDB(userModel: UserModel):String{
-//        val api=RetroInterface.create()
-//        api.profileImgGet(userModel).enqueue(object : Callback<ProfileImgResult> {
-//            override fun onResponse(call: Call<ProfileImgResult>,response: Response<ProfileImgResult>) {
-//                if(response.isSuccessful){
-//                    val result = response.body()
-//
-//                    var imgBlob = result!!.image
-//                    imgStr = imgBlob
-//                }
-//                else
-//                {
-//
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ProfileImgResult>, t: Throwable) {
-//                Log.d("CONNECTION FAILURE :", t.localizedMessage)
-//
-//            }
-//        })
-//    }
 
 }

@@ -1,6 +1,8 @@
 package com.example.hci
 
 import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,18 @@ class MyfriendAdapter(private val context : Context) : RecyclerView.Adapter<Myfr
         {
             friend_name.text = item.friend_name
             friend_email.text = item.friend_email
+
+            invite.setOnClickListener {
+                val dialog = InviteFriendDialog(context, item.friend_id)
+                dialog.showDialog()
+            }
+
+            chat.setOnClickListener {
+                val intent = Intent(context, ChattingActivity::class.java)
+                intent.putExtra("friendname", item.friend_name)
+                context.startActivity(intent)
+            }
+
         }
     }
 

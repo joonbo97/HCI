@@ -172,7 +172,7 @@ interface RetroInterface {
     @POST("/group/invite")
     fun groupInvite(
         @Body jsonparms : GroupInviteModel
-    ) : Call<GroupInviteResult>
+    ) : Call<String>
 
     @POST("/group/inviteList")
     fun groupInviteList(
@@ -209,7 +209,7 @@ interface RetroInterface {
         @Body jsonparms : AuthMatchModel
     ) : Call<String>
 
-    @GET("/group/search")
+    @POST("/group/search")
     fun groupSearch(
         @Body jsonparms : GroupSearchModel
     ) : Call<List<GroupSearchResult>>

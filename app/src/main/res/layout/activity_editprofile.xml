@@ -35,8 +35,8 @@
 
     <ImageView
         android:id="@+id/back_image4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="13dp"
+        android:layout_height="11dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="58dp"
         app:layout_constraintStart_toStartOf="parent"

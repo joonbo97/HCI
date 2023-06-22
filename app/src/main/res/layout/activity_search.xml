@@ -7,6 +7,18 @@
     android:background="@drawable/trst"
     tools:context=".SearchActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/SelectCategory_RecyclerView"
+        android:layout_width="385dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="123dp"
+        android:orientation="vertical"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/back_image3"
         android:layout_width="wrap_content"
@@ -43,5 +55,49 @@
         app:layout_constraintStart_toEndOf="@+id/back_image3"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/top_search" />
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="290dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/SelectCategory_RecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myfriendtitle"
+        app:srcCompat="@drawable/searchbox" />
+
+    <EditText
+        android:id="@+id/edit_group_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="97dp"
+        android:background="@null"
+        android:ems="13"
+        android:hint="검색어를 입력하세요."
+        android:singleLine="true"
+        android:maxLines="1"
+        android:inputType="none"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView27"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="321dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/searchinboxbtn" />
 
 </android.support.constraint.ConstraintLayout>

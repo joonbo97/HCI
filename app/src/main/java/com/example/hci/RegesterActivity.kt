@@ -295,7 +295,7 @@ class RegesterActivity : AppCompatActivity() {
                     if((uid != -1 ) && senddoneflag && emailflag)
                     {
                         Toast.makeText(
-                            this@RegesterActivity, "회원가입 성공 지역을 선택해주세요. $uid", Toast.LENGTH_SHORT).show()
+                            this@RegesterActivity, "회원가입 성공 지역을 선택해주세요.", Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(this@RegesterActivity, SetlocationActivity::class.java)
                         intent.putExtra("uid", uid)
